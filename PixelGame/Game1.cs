@@ -260,15 +260,23 @@ namespace PixelGame
             int CollisionToCheck = -1;
 
 
-            for (int yOffset = 0; yOffset < CubeCheckDistance; yOffset++)
+            for (int Offset = 0; Offset < CubeCheckDistance; Offset++)
             {
                 if (Direction == "Down")
                 {
-                    CollisionToCheck = CheckLineCollision(x1, y1 + yOffset, x2, y2 + yOffset, TileWidth);
+                    CollisionToCheck = CheckLineCollision(x1, y1 + Offset, x2, y2 + Offset, TileWidth);
                 }
                 else if (Direction == "Up")
                 {
-                    CollisionToCheck = CheckLineCollision(x1, y1 - yOffset, x2, y2 - yOffset, TileWidth);
+                    CollisionToCheck = CheckLineCollision(x1, y1 - Offset, x2, y2 - Offset, TileWidth);
+                }
+                else if (Direction == "Left")
+                {
+                    CollisionToCheck = CheckLineCollision(x1 - Offset, y1, x2 - Offset, y2, 1);
+                }
+                else if (Direction == "Right")
+                {
+                    CollisionToCheck = CheckLineCollision(x1 + Offset, y1, x2 + Offset, y2, 1);
                 }
 
                 if (GetPhysicsType(CollisionToCheck) == 2)
