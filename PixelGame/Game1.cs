@@ -465,6 +465,14 @@ namespace PixelGame
             {
                 Player.Momentum_Vertical = -TileHeight;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                Player.Momentum_Horizontal = -TileWidth / 2;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                Player.Momentum_Horizontal = TileWidth / 2;
+            }
 
             gameTick++;
 
