@@ -233,7 +233,7 @@ namespace PixelGame
             }
 
             //Vertical Line
-            else if (y1 != y2 && 0 == 1)
+            else if (y1 != y2)
             {
                 for (int y = y1; y < y2; y += CheckDistance)
                 {
@@ -272,11 +272,11 @@ namespace PixelGame
                 }
                 else if (Direction == "Left")
                 {
-                    CollisionToCheck = CheckLineCollision(x1 - Offset, y1, x2 - Offset, y2, 1);
+                    CollisionToCheck = CheckLineCollision(x1 - Offset, y1, x2 - Offset, y2, TileWidth);
                 }
                 else if (Direction == "Right")
                 {
-                    CollisionToCheck = CheckLineCollision(x1 + Offset, y1, x2 + Offset, y2, 1);
+                    CollisionToCheck = CheckLineCollision(x1 + Offset, y1, x2 + Offset, y2, TileWidth);
                 }
 
                 if (GetPhysicsType(CollisionToCheck) == 2)
