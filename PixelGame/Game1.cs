@@ -424,12 +424,12 @@ namespace PixelGame
             //Right
             if (Player.Momentum_Horizontal > 0)
             {
-                (int, int) CollisionDetails = CheckCubeCollision(Player.x + Player.Width + 1, Player.y,
-                                                                    Player.x + Player.Width + 1, Player.y + Player.Height,
+                (int, int) CollisionDetails = CheckCubeCollision(Player.x + Player.Width, Player.y,
+                                                                    Player.x + Player.Width, Player.y + Player.Height,
                                                                     "Right", Player.Momentum_Horizontal);
 
-                Player.x -= CollisionDetails.Item1;
-                CameraOffset_X -= CollisionDetails.Item1;
+                Player.x += CollisionDetails.Item1;
+                CameraOffset_X += CollisionDetails.Item1;
 
                 //Soid
                 if (GetPhysicsType(CollisionDetails.Item2) == 2)
