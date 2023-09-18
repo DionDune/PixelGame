@@ -403,9 +403,20 @@ namespace PixelGame
                 }
             }
         }
+        private void Execute_PlayerMomentum_Horizontal()
+        {
+            // Going Left
+            if (Player.Momentum_Horizontal < 0)
+            {
+                (int, int) CollisionDetails = CheckCubeCollision(Player.x - 1, Player.y,
+                                                                    Player.x - 1, Player.y + Player.Height,
+                                                                    "Left", -Player.Momentum_Horizontal);
+            }
+        }
         private void PlayerMovementHandler()
         {
             Execute_PlayerMomentum_Vertical();
+            Execute_PlayerMomentum_Horizontal();
         }
 
         #endregion
