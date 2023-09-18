@@ -411,6 +411,31 @@ namespace PixelGame
                 (int, int) CollisionDetails = CheckCubeCollision(Player.x - 1, Player.y,
                                                                     Player.x - 1, Player.y + Player.Height,
                                                                     "Left", -Player.Momentum_Horizontal);
+
+                Player.x -= CollisionDetails.Item1;
+                CameraOffset_X -= CollisionDetails.Item1;
+
+                //Soid
+                if (GetPhysicsType(CollisionDetails.Item2) == 2)
+                {
+                    Player.Momentum_Horizontal = 0;
+                }
+            }
+            //Right
+            if (Player.Momentum_Horizontal > 0)
+            {
+                (int, int) CollisionDetails = CheckCubeCollision(Player.x + Player.Width + 1, Player.y,
+                                                                    Player.x + Player.Width + 1, Player.y + Player.Height,
+                                                                    "Right", Player.Momentum_Horizontal);
+
+                Player.x -= CollisionDetails.Item1;
+                CameraOffset_X -= CollisionDetails.Item1;
+
+                //Soid
+                if (GetPhysicsType(CollisionDetails.Item2) == 2)
+                {
+                    Player.Momentum_Horizontal = 0;
+                }
             }
         }
         private void PlayerMovementHandler()
