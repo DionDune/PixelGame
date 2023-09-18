@@ -79,8 +79,8 @@ namespace PixelGame
 
             Player = new Player()
             {
-                Width = 160, // 32
-                Height = 160, // 48
+                Width = 32, // 32
+                Height = 48, // 48
 
                 Health = 100,
                 Health_Max = 200,
