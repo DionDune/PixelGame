@@ -21,6 +21,7 @@ namespace PixelGame
 
         //Textures
         Texture2D Texture_Default;
+        Texture2D Texture_White;
 
         //World / Tiles
         int TileWidth;
@@ -107,6 +108,7 @@ namespace PixelGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Texture_Default = Content.Load<Texture2D>("Texture_Default");
+            Texture_White = Content.Load<Texture2D>("Colour_White");
         }
 
         #endregion
