@@ -507,7 +507,7 @@ namespace PixelGame
             }
 
             //Player
-            _spriteBatch.Draw(Texture_Default, new Rectangle(Player.x - CameraOffset_X, Player.y - CameraOffset_Y, Player.Width, Player.Height), Color.White);
+            _spriteBatch.Draw(Texture_White, new Rectangle(Player.x - CameraOffset_X, Player.y - CameraOffset_Y, Player.Width, Player.Height), Color.Red);
 
             _spriteBatch.End();
             // END Draw ------
