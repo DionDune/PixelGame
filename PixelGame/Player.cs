@@ -30,6 +30,10 @@ namespace PixelGame
 
         public bool IsFlying { get; set; }
 
+        public bool IsMovingLeft { get; set; }
+        public bool IsMovingRight { get; set; }
+        public bool IsJumping { get; set; }
+
         public Player()
         {
             x = 0;
