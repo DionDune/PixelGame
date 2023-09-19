@@ -45,6 +45,9 @@ namespace PixelGame
         //Player
         Player Player = new Player();
 
+        //Keys
+        List<Keys> Keys_BeingPressed = new List<Keys>();
+
         #endregion
 
         #region Initialize
@@ -444,6 +447,25 @@ namespace PixelGame
         {
             Execute_PlayerMomentum_Vertical();
             Execute_PlayerMomentum_Horizontal();
+        }
+
+        #endregion
+
+        #region Keybinds
+
+        private void KeyBind_Handler()
+        {
+            List<Keys> Keys_NewlyPressed = new List<Keys>(Keyboard.GetState().GetPressedKeys());
+
+            if (Keys_NewlyPressed.Contains(Keys.A) && !Keys_BeingPressed.Contains(Keys.D))
+            {
+                Player.IsMovingLeft = true;
+            }
+            else if (Keys_BeingPressed.Contains(Keys.D) && !Keys_BeingPressed.Contains(Keys.A))
+            {
+                Player.IsMovingRight = true;
+            }
+            else if (Keys_BeingPressed.Contains(Keys.D) && Keys_BeingPressed.Contains(Keys.))
         }
 
         #endregion
