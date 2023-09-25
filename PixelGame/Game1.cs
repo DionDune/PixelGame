@@ -356,6 +356,12 @@ namespace PixelGame
             CameraOffset_Y = Player.y - ((_graphics.PreferredBackBufferHeight - Player.Height) / 2);
         }
 
+        private void Camera_SetRenderDistance()
+        {
+            ScreenWidth = _graphics.PreferredBackBufferWidth / TileWidth + 1;
+            ScreenHeight = _graphics.PreferredBackBufferHeight / TileHeight + 1;
+        }
+
         private void Window_ToggleFullScreen()
         {
             if (!_graphics.IsFullScreen)
@@ -374,6 +380,7 @@ namespace PixelGame
             _graphics.ToggleFullScreen();
 
             Camera_SetOffset();
+            Camera_SetRenderDistance();
         }
 
         #endregion
