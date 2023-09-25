@@ -372,6 +372,8 @@ namespace PixelGame
             }
 
             _graphics.ToggleFullScreen();
+
+            Camera_SetOffset();
         }
 
         #endregion
