@@ -547,18 +547,13 @@ namespace PixelGame
             PlayerMovementHandler();
             Execute_BlockLoadBoundary();
 
-            /*if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
-                Player.Momentum_Vertical = -TileHeight;
+                World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = new Tile()
+                {
+                    Type = 1
+                };
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                Player.Momentum_Horizontal = -TileWidth / 2;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                Player.Momentum_Horizontal = TileWidth / 2;
-            }*/
 
             gameTick++;
 
