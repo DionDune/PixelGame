@@ -75,6 +75,7 @@ namespace PixelGame
             WorldHeight = 200;
             TileWidth = 16;
             TileHeight = 16;
+            //Minimum Tile Dims should be 6*6. Recommonded is 16*16
 
             ScreenWidth = _graphics.PreferredBackBufferWidth / TileWidth;
             ScreenHeight = _graphics.PreferredBackBufferHeight / TileHeight;
@@ -443,8 +444,45 @@ namespace PixelGame
                 }
             }
         }
+
+        private void PlayerMovement_Horizontal()
+        {
+            int CurrentSpeedMax = (int)Math.Round(Player.Speed_Base * TileWidth, 0);
+
+            //Left
+            if (Player.IsMovingLeft && !Player.IsMovingRight)
+            {
+                if (Player.Momentum_Horizontal > -CurrentSpeedMax)
+                {
+                    Player.Momentum_Horizontal--;
+                }
+            }
+            //Right
+            if (Player.IsMovingRight && !Player.IsMovingLeft)
+            {
+                if (Player.Momentum_Horizontal < CurrentSpeedMax)
+                {
+                    Player.Momentum_Horizontal++;
+                }
+            }
+            //Slowdown
+            if (!Player.IsMovingLeft && !Player.IsMovingRight)
+            {
+                if (Player.Momentum_Horizontal < 0)
+                {
+                    Player.Momentum_Horizontal++;
+                }
+                else if (Player.Momentum_Horizontal > 0)
+                {
+                    Player.Momentum_Horizontal--;
+                }
+            }
+        }
+
         private void PlayerMovementHandler()
         {
+            PlayerMovement_Horizontal();
+
             Execute_PlayerMomentum_Vertical();
             Execute_PlayerMomentum_Horizontal();
         }
