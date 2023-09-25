@@ -450,7 +450,7 @@ namespace PixelGame
             int CurrentSpeedMax = (int)Math.Round(Player.Speed_Base * TileWidth, 0);
 
             //Left
-            if (Player.IsMovingLeft && !Player.IsMovingRight)
+            if (Player.IsMovingLeft && !Player.IsMovingRight && gameTick % 3 == 0)
             {
                 if (Player.Momentum_Horizontal > -CurrentSpeedMax)
                 {
@@ -458,7 +458,7 @@ namespace PixelGame
                 }
             }
             //Right
-            if (Player.IsMovingRight && !Player.IsMovingLeft)
+            if (Player.IsMovingRight && !Player.IsMovingLeft && gameTick % 3 == 0)
             {
                 if (Player.Momentum_Horizontal < CurrentSpeedMax)
                 {
@@ -466,7 +466,7 @@ namespace PixelGame
                 }
             }
             //Slowdown
-            if (!Player.IsMovingLeft && !Player.IsMovingRight)
+            if (!Player.IsMovingLeft && !Player.IsMovingRight && gameTick % 4 == 0)
             {
                 if (Player.Momentum_Horizontal < 0)
                 {
