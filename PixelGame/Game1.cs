@@ -457,15 +457,29 @@ namespace PixelGame
         {
             List<Keys> Keys_NewlyPressed = new List<Keys>(Keyboard.GetState().GetPressedKeys());
 
-            if (Keys_NewlyPressed.Contains(Keys.A) && !Keys_BeingPressed.Contains(Keys.D))
+            if (Keys_NewlyPressed.Contains(Keys.A) && !Keys_NewlyPressed.Contains(Keys.D))
             {
                 Player.IsMovingLeft = true;
             }
-            else if (Keys_BeingPressed.Contains(Keys.D) && !Keys_BeingPressed.Contains(Keys.A))
+            else if (Keys_NewlyPressed.Contains(Keys.D) && !Keys_NewlyPressed.Contains(Keys.A))
             {
                 Player.IsMovingRight = true;
             }
-            else if (Keys_BeingPressed.Contains(Keys.D) && Keys_BeingPressed.Contains(Keys.))
+            if (Keys_NewlyPressed.Contains(Keys.A) && Keys_NewlyPressed.Contains(Keys.D))
+            {
+                if (Keys_BeingPressed.Contains(Keys.A) && !Keys_BeingPressed.Contains(Keys.D))
+                {
+                    Player.IsMovingLeft = false;
+                    Player.IsMovingRight = true;
+                }
+                else if (Keys_BeingPressed.Contains(Keys.D) && !Keys_BeingPressed.Contains(Keys.A))
+                {
+                    Player.IsMovingLeft = true;
+                    Player.IsMovingRight = false;
+                }
+            }
+
+            Keys_BeingPressed = Keys_NewlyPressed;
         }
 
         #endregion
@@ -482,10 +496,11 @@ namespace PixelGame
 
         protected override void Update(GameTime gameTime)
         {
+            KeyBind_Handler();
             PlayerMovementHandler();
             Execute_BlockLoadBoundary();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            /*if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 Player.Momentum_Vertical = -TileHeight;
             }
@@ -496,7 +511,7 @@ namespace PixelGame
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 Player.Momentum_Horizontal = TileWidth / 2;
-            }
+            }*/
 
             gameTick++;
 
