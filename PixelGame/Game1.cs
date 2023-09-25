@@ -478,7 +478,7 @@ namespace PixelGame
                 }
             }
         }
-
+        
         private void PlayerMovementHandler()
         {
             PlayerMovement_Horizontal();
@@ -524,6 +524,17 @@ namespace PixelGame
             if (!Keys_NewlyPressed.Contains(Keys.D))
             {
                 Player.IsMovingRight = false;
+            }
+
+
+
+            if (Keys_NewlyPressed.Contains(Keys.Space))
+            {
+                Player.IsJumping = true;
+            }
+            else
+            {
+                Player.IsJumping = false;
             }
 
             Keys_BeingPressed = Keys_NewlyPressed;
