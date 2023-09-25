@@ -517,6 +517,15 @@ namespace PixelGame
                 }
             }
 
+            if (!Keys_NewlyPressed.Contains(Keys.A))
+            {
+                Player.IsMovingLeft = false;
+            }
+            if (!Keys_NewlyPressed.Contains(Keys.D))
+            {
+                Player.IsMovingRight = false;
+            }
+
             Keys_BeingPressed = Keys_NewlyPressed;
         }
 
