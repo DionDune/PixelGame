@@ -356,6 +356,24 @@ namespace PixelGame
             CameraOffset_Y = Player.y - ((_graphics.PreferredBackBufferHeight - Player.Height) / 2);
         }
 
+        private void Window_ToggleFullScreen()
+        {
+            if (!_graphics.IsFullScreen)
+            {
+                _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+                _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+                _graphics.ApplyChanges();
+            }
+            else
+            {
+                _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width / 2;
+                _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height / 2;
+                _graphics.ApplyChanges();
+            }
+
+            _graphics.ToggleFullScreen();
+        }
+
         #endregion
 
         #region Player Movement
@@ -534,7 +552,6 @@ namespace PixelGame
                     Player.IsMovingRight = false;
                 }
             }
-
             if (!Keys_NewlyPressed.Contains(Keys.A))
             {
                 Player.IsMovingLeft = false;
@@ -553,6 +570,13 @@ namespace PixelGame
             else
             {
                 Player.IsJumping = false;
+            }
+
+
+
+            if (Keys_NewlyPressed.Contains(Keys.F) && !Keys_BeingPressed.Contains(Keys.F))
+            {
+                Window_ToggleFullScreen();
             }
 
             Keys_BeingPressed = Keys_NewlyPressed;
