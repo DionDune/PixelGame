@@ -478,10 +478,28 @@ namespace PixelGame
                 }
             }
         }
-        
+        private void PlayerMovement_Vertical()
+        {
+            if (Player.IsJumping)
+            {
+                (int, int) CollisionDetails = CheckCubeCollision(Player.x, Player.y + Player.Height,
+                                                                    Player.x + Player.Width, Player.y + Player.Height,
+                                                                    "Down", 1);
+
+
+                // Solid
+                if (GetPhysicsType(CollisionDetails.Item2) == 2)
+                {
+                    Player.Momentum_Vertical = -Player.JumpHeight;
+                }
+            }
+        }
+
+
         private void PlayerMovementHandler()
         {
             PlayerMovement_Horizontal();
+            PlayerMovement_Vertical();
 
             Execute_PlayerMomentum_Vertical();
             Execute_PlayerMomentum_Horizontal();
