@@ -94,8 +94,8 @@ namespace PixelGame
                 Breath_Max = 1000,
 
                 JumpHeight = 12,
-                Speed_Base = 1 / 3,
-                Speed_Max = 1 / 2
+                Speed_Base = 1 / 3f,
+                Speed_Max = 1 / 2f
             };
             Player.x = (_graphics.PreferredBackBufferWidth / 2) - (Player.Width / 2);
             Player.y = (_graphics.PreferredBackBufferHeight / 2) - (Player.Height / 2);
