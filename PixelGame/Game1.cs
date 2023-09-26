@@ -507,7 +507,7 @@ namespace PixelGame
         }
         private void PlayerMovement_Vertical()
         {
-            if (Player.IsJumping)
+            if (Player.IsJumping || (Player.IsFlying && Player.IsFlyingUp))
             {
                 (int, int) CollisionDetails = CheckCubeCollision(Player.x, Player.y + Player.Height,
                                                                     Player.x + Player.Width, Player.y + Player.Height,
