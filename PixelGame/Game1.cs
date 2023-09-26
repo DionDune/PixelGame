@@ -392,7 +392,7 @@ namespace PixelGame
             //Collision type directly bellow player is checked. If there is nothing, the players vertical momentum increases (downward)
             int GravityEffectInterval = 2;
 
-            if (gameTick % GravityEffectInterval == 0)
+            if (gameTick % GravityEffectInterval == 0 && !Player.IsFlying)
             {
                 if (GetPhysicsType(CheckLineCollision(Player.x, Player.y + Player.Height + 1,
                                                     Player.x + Player.Width, Player.y + Player.Height + 1,
@@ -530,6 +530,11 @@ namespace PixelGame
 
             Execute_PlayerMomentum_Vertical();
             Execute_PlayerMomentum_Horizontal();
+
+            if (Player.IsFlying && Player.Momentum_Vertical != 0)
+            {
+                Player.Momentum_Vertical = 0;
+            }
         }
 
 
