@@ -515,10 +515,14 @@ namespace PixelGame
 
 
                 // Solid
-                if (GetPhysicsType(CollisionDetails.Item2) == 2)
+                if (GetPhysicsType(CollisionDetails.Item2) == 2 || Player.IsFlying)
                 {
                     Player.Momentum_Vertical = -Player.JumpHeight;
                 }
+            }
+            if (Player.IsFlyingDown)
+            {
+                Player.Momentum_Vertical = Player.JumpHeight;
             }
         }
 
