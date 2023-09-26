@@ -589,6 +589,13 @@ namespace PixelGame
 
 
 
+            if (Keys_NewlyPressed.Contains(Keys.LeftAlt) && !Keys_BeingPressed.Contains(Keys.LeftAlt))
+            {
+                PlayerMovement_ToggleFlight();
+            }
+
+
+
             if (Keys_NewlyPressed.Contains(Keys.F) && !Keys_BeingPressed.Contains(Keys.F))
             {
                 Window_ToggleFullScreen();
