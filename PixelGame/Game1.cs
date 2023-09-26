@@ -532,6 +532,12 @@ namespace PixelGame
             Execute_PlayerMomentum_Horizontal();
         }
 
+
+        private void PlayerMovement_ToggleFlight()
+        {
+            Player.IsFlying = !Player.IsFlying;
+        }
+
         #endregion
 
         #region Keybinds
