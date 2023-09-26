@@ -603,6 +603,38 @@ namespace PixelGame
                 PlayerMovement_ToggleFlight();
             }
 
+            
+
+            if (Keys_NewlyPressed.Contains(Keys.W) && !Keys_NewlyPressed.Contains(Keys.S) && Player.IsFlying)
+            {
+                Player.IsFlyingUp = true;
+            }
+            else if (Keys_NewlyPressed.Contains(Keys.S) && !Keys_NewlyPressed.Contains(Keys.W) && Player.IsFlying)
+            {
+                Player.IsFlyingDown = true;
+            }
+            if (Keys_NewlyPressed.Contains(Keys.S) && Keys_NewlyPressed.Contains(Keys.W) && Player.IsFlying)
+            {
+                if (Keys_BeingPressed.Contains(Keys.S) && !Keys_BeingPressed.Contains(Keys.W))
+                {
+                    Player.IsFlyingDown = false;
+                    Player.IsFlyingUp = true;
+                }
+                else if (Keys_BeingPressed.Contains(Keys.W) && !Keys_BeingPressed.Contains(Keys.S))
+                {
+                    Player.IsFlyingDown = true;
+                    Player.IsFlyingUp = false;
+                }
+            }
+            if (!Keys_NewlyPressed.Contains(Keys.S) || !Player.IsFlying)
+            {
+                Player.IsFlyingDown = false;
+            }
+            if (!Keys_NewlyPressed.Contains(Keys.W) || !Player.IsFlying)
+            {
+                Player.IsFlyingUp = false;
+            }
+
 
 
             if (Keys_NewlyPressed.Contains(Keys.F) && !Keys_BeingPressed.Contains(Keys.F))
