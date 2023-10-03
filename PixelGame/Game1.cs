@@ -150,6 +150,7 @@ namespace PixelGame
 
             GenerateMap_Base();
             GenerateMap_Border(BorderWidth);
+            GenerateMap_GenerateTerrain(BorderWidth, 50);
         }
 
         private void GenerateMap_Base()
@@ -185,124 +186,243 @@ namespace PixelGame
             }
         }
 
+        private List<int> GenerateMap_GenSurfaceHeights()
+        {
+            int Height_ChangeAmount = 1;
+
+            var GroundHeights = new List<int>();
+
+            GroundHeights.Add(WorldHeight / 3);
+
+            for (int x_pos = 1; x_pos < WorldWidth - 9; x_pos++)
+            {
+                int heightChangeDirection = random.Next(0, 5);
+
+                // DOWN
+                if (heightChangeDirection == 0 && GroundHeights[x_pos - 1] < WorldHeight)
+                {
+                    if (random.Next(0, 18) == 0) // Changes by 2
+                    {
+                        GroundHeights.Add(GroundHeights[x_pos - 1] + 2 * Height_ChangeAmount);
+                    }
+                    else // Changes by 1
+                    {
+                        GroundHeights.Add(GroundHeights[x_pos - 1] + 1 * Height_ChangeAmount);
+                    }
+                }
+
+                // UP
+                else if (heightChangeDirection == 1 && GroundHeights[x_pos - 1] > 5)
+                {
+                    if (random.Next(0, 18) == 0) // Changes by 2
+                    {
+                        GroundHeights.Add(GroundHeights[x_pos - 1] - 2 * Height_ChangeAmount);
+                    }
+                    else if (random.Next(0, 112) == 0) // Changes by 5
+                    {
+                        GroundHeights.Add(GroundHeights[x_pos - 1] - 5 * Height_ChangeAmount);
+                    }
+                    else // Changes by 1
+                    {
+                        GroundHeights.Add(GroundHeights[x_pos - 1] - 1 * Height_ChangeAmount);
+                    }
+                }
+
+                // SAME
+                else
+                {
+                    GroundHeights.Add(GroundHeights[x_pos - 1]);
+                }
+            }
+
+            return GroundHeights;
+        }
+        private List<string> GenerateMap_GenBiomes()
+        {
+            var BiomeRegions = new List<string>();
+
+            string Biome_Default = "Grass";
+
+            string Biome_Type = Biome_Default;
+            int Biome_Left = 0;
+
+            for (int x_pos = 0; x_pos < WorldWidth; x_pos++)
+            {
+                if (random.Next(0, 600) == 0 && Biome_Type != "Sand")
+                {
+                    Biome_Type = "Sand";
+                    Biome_Left = random.Next(200, 500);
+                }
+
+                BiomeRegions.Add(Biome_Type);
+                if (Biome_Type != Biome_Default)
+                {
+                    Biome_Left--;
+                    if (Biome_Left == 0)
+                    {
+                        Biome_Type = Biome_Default;
+                    }
+                }
+            }
+
+            return BiomeRegions;
+        }
+
+        private void GenerateMap_GenerateTerrain(int BorderWidth, int BedrockStartDepth)
+        {
+            List<int> GroundHeights = GenerateMap_GenSurfaceHeights();
+
+            // Gens surface terrain
+            for (int x_pos = BorderWidth; x_pos < GroundHeights.Count(); x_pos++)
+            {
+                byte Block_Type = 3; // Grass
+                World[GroundHeights[x_pos]][x_pos] = new Tile() { Type = Block_Type };
+            }
+
+            // Gens sub terrain
+            for (int y_pos = BorderWidth; y_pos < WorldHeight - BorderWidth; y_pos++)
+            {
+                for (int x_pos = BorderWidth; x_pos < GroundHeights.Count(); x_pos++)
+                {
+                    if (y_pos > GroundHeights[x_pos])
+                    {
+                        byte type = 4; // Rock
+
+                        if (y_pos < GroundHeights[x_pos] + 15 + random.Next(-5, 5))
+                        {
+                            type = 3; // Dirt
+                        }
+                        if (y_pos > World.Count() - BedrockStartDepth)
+                        {
+                            if (random.Next(y_pos, World.Count() - (World.Count() - y_pos) / 2) == y_pos)
+                            {
+                                type = 7; // Bedrock
+                            }
+                        }
+                        World[y_pos][x_pos] = new Tile() { Type = type };
+                    }
+                }
+            }
+        }
+
         #endregion
 
         /////////////////////////////////////////
 
         #region Collision Detection
 
-        private int GetPhysicsType(int BlockId)
-        {
-            //Liquids: 1
-            //Solids: 2
-
-            if (BlockId == -1)
+                private int GetPhysicsType(int BlockId)
             {
-                return 0;
-            }
-            if (BlockId == 6)
-            {
-                //return 1;
-            }
-            return 2;
-        }
+                //Liquids: 1
+                //Solids: 2
 
-        private int CheckPointCollision(int x, int y)
-        {
-            if (World[y / TileHeight][x / TileWidth] != null)
-            {
-                return (int)(World[y / TileHeight][x / TileWidth].Type);
-            }
-
-            return -1;
-        }
-        private int CheckLineCollision(int x1, int y1, int x2, int y2, int CheckDistance)
-        {
-            int CollisionType = -1;
-
-            //Horizontal Line
-            if (x1 != x2)
-            {
-                for (int x = x1; x <= x2; x += CheckDistance)
+                if (BlockId == -1)
                 {
-                    if (GetPhysicsType(CheckPointCollision(x, y1)) > CollisionType)
+                    return 0;
+                }
+                if (BlockId == 6)
+                {
+                    //return 1;
+                }
+                return 2;
+            }
+
+            private int CheckPointCollision(int x, int y)
+            {
+                if (World[y / TileHeight][x / TileWidth] != null)
+                {
+                    return (int)(World[y / TileHeight][x / TileWidth].Type);
+                }
+
+                return -1;
+            }
+            private int CheckLineCollision(int x1, int y1, int x2, int y2, int CheckDistance)
+            {
+                int CollisionType = -1;
+
+                //Horizontal Line
+                if (x1 != x2)
+                {
+                    for (int x = x1; x <= x2; x += CheckDistance)
                     {
-                        CollisionType = CheckPointCollision(x, y1);
+                        if (GetPhysicsType(CheckPointCollision(x, y1)) > CollisionType)
+                        {
+                            CollisionType = CheckPointCollision(x, y1);
+                        }
+                    }
+                    if ((x1 - x2) % CheckDistance != 0)
+                    {
+                        if (GetPhysicsType(CheckPointCollision(x2, y1)) > CollisionType)
+                        {
+                            CollisionType = CheckPointCollision(x2, y1);
+                        }
                     }
                 }
-                if ((x1 - x2) % CheckDistance != 0)
+
+                //Vertical Line
+                else if (y1 != y2)
                 {
-                    if (GetPhysicsType(CheckPointCollision(x2, y1)) > CollisionType)
+                    for (int y = y1; y <= y2; y += CheckDistance)
                     {
-                        CollisionType = CheckPointCollision(x2, y1);
+                        if (GetPhysicsType(CheckPointCollision(x1, y)) > CollisionType)
+                        {
+                            CollisionType = CheckPointCollision(x1, y);
+                        }
+                    }
+                    if ((y1 - y2) % CheckDistance != 0)
+                    {
+                        if (GetPhysicsType(CheckPointCollision(x1, y2)) > CollisionType)
+                        {
+                            CollisionType = CheckPointCollision(x1, y2);
+                        }
                     }
                 }
-            }
 
-            //Vertical Line
-            else if (y1 != y2)
+                return CollisionType;
+            }
+            private (int, int) CheckCubeCollision(int x1, int y1, int x2, int y2, string Direction, int CubeCheckDistance)
             {
-                for (int y = y1; y <= y2; y += CheckDistance)
+                int Distance = 0;
+                int CollisionType = -1;
+                int CollisionToCheck = -1;
+
+
+                for (int Offset = 0; Offset < CubeCheckDistance; Offset++)
                 {
-                    if (GetPhysicsType(CheckPointCollision(x1, y)) > CollisionType)
+                    if (Direction == "Down")
                     {
-                        CollisionType = CheckPointCollision(x1, y);
+                        CollisionToCheck = CheckLineCollision(x1, y1 + Offset, x2, y2 + Offset, TileWidth);
                     }
-                }
-                if ((y1 - y2) % CheckDistance != 0)
-                {
-                    if (GetPhysicsType(CheckPointCollision(x1, y2)) > CollisionType)
+                    else if (Direction == "Up")
                     {
-                        CollisionType = CheckPointCollision(x1, y2);
+                        CollisionToCheck = CheckLineCollision(x1, y1 - Offset, x2, y2 - Offset, TileWidth);
                     }
+                    else if (Direction == "Left")
+                    {
+                        CollisionToCheck = CheckLineCollision(x1 - Offset, y1, x2 - Offset, y2, TileWidth);
+                    }
+                    else if (Direction == "Right")
+                    {
+                        CollisionToCheck = CheckLineCollision(x1 + Offset, y1, x2 + Offset, y2, TileWidth);
+                    }
+
+                    if (GetPhysicsType(CollisionToCheck) == 2)
+                    {
+                        return (Distance, CollisionToCheck);
+                    }
+
+                    if (GetPhysicsType(CollisionToCheck) > GetPhysicsType(CollisionType))
+                    {
+                        CollisionType = CollisionToCheck;
+                    }
+
+                    Distance++;
                 }
+
+                return (Distance, CollisionType);
             }
 
-            return CollisionType;
-        }
-        private (int, int) CheckCubeCollision(int x1, int y1, int x2, int y2, string Direction, int CubeCheckDistance)
-        {
-            int Distance = 0;
-            int CollisionType = -1;
-            int CollisionToCheck = -1;
-
-
-            for (int Offset = 0; Offset < CubeCheckDistance; Offset++)
-            {
-                if (Direction == "Down")
-                {
-                    CollisionToCheck = CheckLineCollision(x1, y1 + Offset, x2, y2 + Offset, TileWidth);
-                }
-                else if (Direction == "Up")
-                {
-                    CollisionToCheck = CheckLineCollision(x1, y1 - Offset, x2, y2 - Offset, TileWidth);
-                }
-                else if (Direction == "Left")
-                {
-                    CollisionToCheck = CheckLineCollision(x1 - Offset, y1, x2 - Offset, y2, TileWidth);
-                }
-                else if (Direction == "Right")
-                {
-                    CollisionToCheck = CheckLineCollision(x1 + Offset, y1, x2 + Offset, y2, TileWidth);
-                }
-
-                if (GetPhysicsType(CollisionToCheck) == 2)
-                {
-                    return (Distance, CollisionToCheck);
-                }
-
-                if (GetPhysicsType(CollisionToCheck) > GetPhysicsType(CollisionType))
-                {
-                    CollisionType = CollisionToCheck;
-                }
-
-                Distance++;
-            }
-
-            return (Distance, CollisionType);
-        }
-
-        #endregion
+            #endregion
 
         #region Camera
 
