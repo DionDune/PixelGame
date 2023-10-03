@@ -779,6 +779,31 @@ namespace PixelGame
             return new Rectangle((x * TileWidth) - CameraOffset_X, (y * TileHeight) - CameraOffset_Y, TileWidth, TileHeight);
         }
 
+        private Color Texture_GetTileColor(byte BlockId)
+        {
+            switch (BlockId)
+            {
+                case 0:
+                    return Color.Red;
+                case 1:
+                    return Color.Purple;
+                case 2:
+                    return Color.Brown;
+                case 3:
+                    return Color.Green;
+                case 4:
+                    return Color.LightGray;
+                case 5:
+                    return Color.SandyBrown;
+                case 6:
+                    return Color.DarkBlue;
+                case 7:
+                    return Color.Black;
+            }
+
+            return Color.White;
+        }
+
         protected override void Update(GameTime gameTime)
         {
             KeyBind_Handler();
