@@ -423,7 +423,7 @@ namespace PixelGame
             else if (Player.Momentum_Vertical < 0)
             {
                 (int, int) CollisionDetails = CheckCubeCollision(Player.x, Player.y - 1,
-                                                                    Player.x + Player.Width, Player.y - 1,
+                                                                    Player.x + (Player.Width - 1), Player.y - 1,
                                                                     "Up", -Player.Momentum_Vertical);
 
                 Player.y -= CollisionDetails.Item1;
@@ -442,7 +442,7 @@ namespace PixelGame
             if (Player.Momentum_Horizontal < 0)
             {
                 (int, int) CollisionDetails = CheckCubeCollision(Player.x - 1, Player.y,
-                                                                    Player.x - 1, Player.y + Player.Height,
+                                                                    Player.x - 1, Player.y + (Player.Height - 1),
                                                                     "Left", -Player.Momentum_Horizontal);
 
                 Player.x -= CollisionDetails.Item1;
@@ -458,7 +458,7 @@ namespace PixelGame
             if (Player.Momentum_Horizontal > 0)
             {
                 (int, int) CollisionDetails = CheckCubeCollision(Player.x + Player.Width, Player.y,
-                                                                    Player.x + Player.Width, Player.y + Player.Height,
+                                                                    Player.x + Player.Width, Player.y + (Player.Height - 1),
                                                                     "Right", Player.Momentum_Horizontal);
 
                 Player.x += CollisionDetails.Item1;
