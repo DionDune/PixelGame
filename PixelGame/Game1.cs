@@ -129,14 +129,14 @@ namespace PixelGame
 
         private void Colors_CreateColours()
         {
-            Color_Barrier = new Color(new Vector3(255, 0, 0));
-            Color_Default = new Color(new Vector3(204, 51, 255));
-            Color_Dirt = new Color(new Vector3(166, 74, 43));
-            Color_Grass = new Color(new Vector3(0, 153, 0));
-            Color_Stone = new Color(new Vector3(140, 140, 140));
-            Color_Sand = new Color(new Vector3(255, 187, 51));
-            Color_Water = new Color(new Vector3(0, 0, 230));
-            Color_Bedrock = new Color(new Vector3(255, 255, 255));
+            Color_Barrier = new Color(255, 0, 0);
+            Color_Default = new Color(204, 51, 255);
+            Color_Dirt = new Color(166, 74, 43);
+            Color_Grass = new Color(0, 153, 0);
+            Color_Stone = new Color(140, 140, 140);
+            Color_Sand = new Color(255, 187, 51);
+            Color_Water = new Color(0, 0, 230);
+            Color_Bedrock = new Color(255, 255, 255);
         }
 
         #endregion
