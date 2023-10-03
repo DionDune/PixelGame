@@ -808,21 +808,21 @@ namespace PixelGame
             switch (BlockId)
             {
                 case 0:
-                    return Color.Red;
+                    return Color_Barrier;
                 case 1:
-                    return Color.Purple;
+                    return Color_Default;
                 case 2:
-                    return Color.Brown;
+                    return Color_Dirt;
                 case 3:
-                    return Color.Green;
+                    return Color_Grass;
                 case 4:
-                    return Color.LightGray;
+                    return Color_Stone;
                 case 5:
-                    return Color.SandyBrown;
+                    return Color_Sand;
                 case 6:
-                    return Color.DarkBlue;
+                    return Color_Water;
                 case 7:
-                    return Color.Black;
+                    return Color_Bedrock;
             }
 
             return Color.White;
