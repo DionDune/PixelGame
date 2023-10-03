@@ -837,13 +837,7 @@ namespace PixelGame
                 {
                     if (World[y][x] != null)
                     {
-                        if (World[y][x].Type == 1) //Default
-                        {
-                            if (World[y][x].TextureTag == 0)
-                            {
-                                _spriteBatch.Draw(Texture_Default, getRect(x, y), Color.White);
-                            }
-                        }
+                        _spriteBatch.Draw(Texture_White, getRect(x, y), Texture_GetTileColor(World[y][x].Type));
                     }
                 }
             }
