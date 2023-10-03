@@ -336,118 +336,118 @@ namespace PixelGame
 
         #region Collision Detection
 
-                private int GetPhysicsType(int BlockId)
-            {
-                //Liquids: 1
-                //Solids: 2
+        private int GetPhysicsType(int BlockId)
+        {
+            //Liquids: 1
+            //Solids: 2
 
-                if (BlockId == -1)
-                {
-                    return 0;
-                }
-                if (BlockId == 6)
-                {
-                    //return 1;
-                }
-                return 2;
+            if (BlockId == -1)
+            {
+                return 0;
+            }
+            if (BlockId == 6)
+            {
+                //return 1;
+            }
+            return 2;
+        }
+
+        private int CheckPointCollision(int x, int y)
+        {
+            if (World[y / TileHeight][x / TileWidth] != null)
+            {
+                return (int)(World[y / TileHeight][x / TileWidth].Type);
             }
 
-            private int CheckPointCollision(int x, int y)
+            return -1;
+        }
+        private int CheckLineCollision(int x1, int y1, int x2, int y2, int CheckDistance)
+        {
+            int CollisionType = -1;
+
+            //Horizontal Line
+            if (x1 != x2)
             {
-                if (World[y / TileHeight][x / TileWidth] != null)
+                for (int x = x1; x <= x2; x += CheckDistance)
                 {
-                    return (int)(World[y / TileHeight][x / TileWidth].Type);
-                }
-
-                return -1;
-            }
-            private int CheckLineCollision(int x1, int y1, int x2, int y2, int CheckDistance)
-            {
-                int CollisionType = -1;
-
-                //Horizontal Line
-                if (x1 != x2)
-                {
-                    for (int x = x1; x <= x2; x += CheckDistance)
+                    if (GetPhysicsType(CheckPointCollision(x, y1)) > CollisionType)
                     {
-                        if (GetPhysicsType(CheckPointCollision(x, y1)) > CollisionType)
-                        {
-                            CollisionType = CheckPointCollision(x, y1);
-                        }
-                    }
-                    if ((x1 - x2) % CheckDistance != 0)
-                    {
-                        if (GetPhysicsType(CheckPointCollision(x2, y1)) > CollisionType)
-                        {
-                            CollisionType = CheckPointCollision(x2, y1);
-                        }
+                        CollisionType = CheckPointCollision(x, y1);
                     }
                 }
-
-                //Vertical Line
-                else if (y1 != y2)
+                if ((x1 - x2) % CheckDistance != 0)
                 {
-                    for (int y = y1; y <= y2; y += CheckDistance)
+                    if (GetPhysicsType(CheckPointCollision(x2, y1)) > CollisionType)
                     {
-                        if (GetPhysicsType(CheckPointCollision(x1, y)) > CollisionType)
-                        {
-                            CollisionType = CheckPointCollision(x1, y);
-                        }
-                    }
-                    if ((y1 - y2) % CheckDistance != 0)
-                    {
-                        if (GetPhysicsType(CheckPointCollision(x1, y2)) > CollisionType)
-                        {
-                            CollisionType = CheckPointCollision(x1, y2);
-                        }
+                        CollisionType = CheckPointCollision(x2, y1);
                     }
                 }
-
-                return CollisionType;
-            }
-            private (int, int) CheckCubeCollision(int x1, int y1, int x2, int y2, string Direction, int CubeCheckDistance)
-            {
-                int Distance = 0;
-                int CollisionType = -1;
-                int CollisionToCheck = -1;
-
-
-                for (int Offset = 0; Offset < CubeCheckDistance; Offset++)
-                {
-                    if (Direction == "Down")
-                    {
-                        CollisionToCheck = CheckLineCollision(x1, y1 + Offset, x2, y2 + Offset, TileWidth);
-                    }
-                    else if (Direction == "Up")
-                    {
-                        CollisionToCheck = CheckLineCollision(x1, y1 - Offset, x2, y2 - Offset, TileWidth);
-                    }
-                    else if (Direction == "Left")
-                    {
-                        CollisionToCheck = CheckLineCollision(x1 - Offset, y1, x2 - Offset, y2, TileWidth);
-                    }
-                    else if (Direction == "Right")
-                    {
-                        CollisionToCheck = CheckLineCollision(x1 + Offset, y1, x2 + Offset, y2, TileWidth);
-                    }
-
-                    if (GetPhysicsType(CollisionToCheck) == 2)
-                    {
-                        return (Distance, CollisionToCheck);
-                    }
-
-                    if (GetPhysicsType(CollisionToCheck) > GetPhysicsType(CollisionType))
-                    {
-                        CollisionType = CollisionToCheck;
-                    }
-
-                    Distance++;
-                }
-
-                return (Distance, CollisionType);
             }
 
-            #endregion
+            //Vertical Line
+            else if (y1 != y2)
+            {
+                for (int y = y1; y <= y2; y += CheckDistance)
+                {
+                    if (GetPhysicsType(CheckPointCollision(x1, y)) > CollisionType)
+                    {
+                        CollisionType = CheckPointCollision(x1, y);
+                    }
+                }
+                if ((y1 - y2) % CheckDistance != 0)
+                {
+                    if (GetPhysicsType(CheckPointCollision(x1, y2)) > CollisionType)
+                    {
+                        CollisionType = CheckPointCollision(x1, y2);
+                    }
+                }
+            }
+
+            return CollisionType;
+        }
+        private (int, int) CheckCubeCollision(int x1, int y1, int x2, int y2, string Direction, int CubeCheckDistance)
+        {
+            int Distance = 0;
+            int CollisionType = -1;
+            int CollisionToCheck = -1;
+
+
+            for (int Offset = 0; Offset < CubeCheckDistance; Offset++)
+            {
+                if (Direction == "Down")
+                {
+                    CollisionToCheck = CheckLineCollision(x1, y1 + Offset, x2, y2 + Offset, TileWidth);
+                }
+                else if (Direction == "Up")
+                {
+                    CollisionToCheck = CheckLineCollision(x1, y1 - Offset, x2, y2 - Offset, TileWidth);
+                }
+                else if (Direction == "Left")
+                {
+                    CollisionToCheck = CheckLineCollision(x1 - Offset, y1, x2 - Offset, y2, TileWidth);
+                }
+                else if (Direction == "Right")
+                {
+                    CollisionToCheck = CheckLineCollision(x1 + Offset, y1, x2 + Offset, y2, TileWidth);
+                }
+
+                if (GetPhysicsType(CollisionToCheck) == 2)
+                {
+                    return (Distance, CollisionToCheck);
+                }
+
+                if (GetPhysicsType(CollisionToCheck) > GetPhysicsType(CollisionType))
+                {
+                    CollisionType = CollisionToCheck;
+                }
+
+                Distance++;
+            }
+
+            return (Distance, CollisionType);
+        }
+
+        #endregion
 
         #region Camera
 
