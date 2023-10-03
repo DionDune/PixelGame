@@ -23,6 +23,16 @@ namespace PixelGame
         Texture2D Texture_Default;
         Texture2D Texture_White;
 
+        //Colors
+        Color Color_Barrier;
+        Color Color_Default;
+        Color Color_Grass;
+        Color Color_Dirt;
+        Color Color_Stone;
+        Color Color_Sand;
+        Color Color_Water;
+        Color Color_Bedrock;
+
         //World / Tiles
         int TileWidth;
         int TileHeight;
@@ -104,6 +114,8 @@ namespace PixelGame
             Camera_SetOffset();
             GenerateMap_Main();
 
+            Colors_CreateColours();
+
             base.Initialize();
         }
 
@@ -113,6 +125,18 @@ namespace PixelGame
 
             Texture_Default = Content.Load<Texture2D>("Texture_Default");
             Texture_White = Content.Load<Texture2D>("Colour_White");
+        }
+
+        private void Colors_CreateColours()
+        {
+            Color_Barrier = new Color(new Vector3(255, 0, 0));
+            Color_Default = new Color(new Vector3(204, 51, 255));
+            Color_Dirt = new Color(new Vector3(166, 74, 43));
+            Color_Grass = new Color(new Vector3(0, 153, 0));
+            Color_Stone = new Color(new Vector3(140, 140, 140));
+            Color_Sand = new Color(new Vector3(255, 187, 51));
+            Color_Water = new Color(new Vector3(0, 0, 230));
+            Color_Bedrock = new Color(new Vector3(255, 255, 255));
         }
 
         #endregion
