@@ -81,8 +81,8 @@ namespace PixelGame
             gameTick = 0;
 
 
-            WorldWidth = 200;
-            WorldHeight = 200;
+            WorldWidth = 800;
+            WorldHeight = 800;
             TileWidth = 16;
             TileHeight = 16;
             //Minimum Tile Dims should be 6*6. Recommonded is 16*16
