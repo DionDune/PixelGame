@@ -146,8 +146,10 @@ namespace PixelGame
 
         private void GenerateMap_Main()
         {
+            int BorderWidth = 20;
+
             GenerateMap_Base();
-            GenerateMap_Border();
+            GenerateMap_Border(BorderWidth);
         }
 
         private void GenerateMap_Base()
@@ -161,9 +163,8 @@ namespace PixelGame
                 }
             }
         }
-        private void GenerateMap_Border()
+        private void GenerateMap_Border(int BorderWidth)
         {
-            ushort BorderWidth = 20;
             for (ushort y = 0; y < World.Count(); y++)
             {
                 for (ushort x = 0; x < World[0].Count(); x++)
