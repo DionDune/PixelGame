@@ -222,7 +222,7 @@ namespace PixelGame
             //Horizontal Line
             if (x1 != x2)
             {
-                for (int x = x1; x < x2; x += CheckDistance)
+                for (int x = x1; x <= x2; x += CheckDistance)
                 {
                     if (GetPhysicsType(CheckPointCollision(x, y1)) > CollisionType)
                     {
@@ -241,7 +241,7 @@ namespace PixelGame
             //Vertical Line
             else if (y1 != y2)
             {
-                for (int y = y1; y < y2; y += CheckDistance)
+                for (int y = y1; y <= y2; y += CheckDistance)
                 {
                     if (GetPhysicsType(CheckPointCollision(x1, y)) > CollisionType)
                     {
