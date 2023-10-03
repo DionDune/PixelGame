@@ -128,6 +128,7 @@ namespace PixelGame
          * 4 == Stone
          * 5 == Sand
          * 6 == Water
+         * 7 == BedRock
          * 
          *  INTEGRAL VERIABLE TYPES
          * sbyte: -128 to 127
