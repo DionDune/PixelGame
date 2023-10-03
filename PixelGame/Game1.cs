@@ -291,7 +291,7 @@ namespace PixelGame
 
                         if (y_pos < GroundHeights[x_pos] + 15 + random.Next(-5, 5))
                         {
-                            type = 3; // Dirt
+                            type = 2; // Dirt
                         }
                         if (y_pos > World.Count() - BedrockStartDepth)
                         {
