@@ -102,7 +102,7 @@ namespace PixelGame
 
 
             Camera_SetOffset();
-            GenerateMap();
+            GenerateMap_Main();
 
             base.Initialize();
         }
@@ -144,7 +144,7 @@ namespace PixelGame
 
         #region Terrain Generation
 
-        private void GenerateMap()
+        private void GenerateMap_Main()
         {
             GenerateMap_Base();
             GenerateMap_Border();
