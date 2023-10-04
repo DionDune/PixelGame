@@ -672,6 +672,11 @@ namespace PixelGame
             }
         }
 
+        private void PlayerMovement_ToggleFlight()
+        {
+            Player.IsFlying = !Player.IsFlying;
+        }
+
 
         private void PlayerMovementHandler()
         {
@@ -686,30 +691,19 @@ namespace PixelGame
                 Player.Momentum_Vertical = 0;
             }
         }
-        
 
-        private void PlayerMovement_ToggleFlight()
+        private void UserControl_PlayerMovement(Keys[] NewKeys)
         {
-            Player.IsFlying = !Player.IsFlying;
-        }
-
-        #endregion
-
-        #region Keybinds
-
-        private void KeyBind_Handler()
-        {
-            Keys[] Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys();
-
-            if (Keys_NewlyPressed.Contains(Keys.A) && !Keys_NewlyPressed.Contains(Keys.D))
+            // Assigning value to player movement tags
+            if (NewKeys.Contains(Keys.A) && !NewKeys.Contains(Keys.D))
             {
                 Player.IsMovingLeft = true;
             }
-            else if (Keys_NewlyPressed.Contains(Keys.D) && !Keys_NewlyPressed.Contains(Keys.A))
+            else if (NewKeys.Contains(Keys.D) && !NewKeys.Contains(Keys.A))
             {
                 Player.IsMovingRight = true;
             }
-            if (Keys_NewlyPressed.Contains(Keys.A) && Keys_NewlyPressed.Contains(Keys.D))
+            if (NewKeys.Contains(Keys.A) && NewKeys.Contains(Keys.D))
             {
                 if (Keys_BeingPressed.Contains(Keys.A) && !Keys_BeingPressed.Contains(Keys.D))
                 {
@@ -722,18 +716,20 @@ namespace PixelGame
                     Player.IsMovingRight = false;
                 }
             }
-            if (!Keys_NewlyPressed.Contains(Keys.A))
+
+            // Reseting Left/Right movement tags
+            if (!NewKeys.Contains(Keys.A))
             {
                 Player.IsMovingLeft = false;
             }
-            if (!Keys_NewlyPressed.Contains(Keys.D))
+            if (!NewKeys.Contains(Keys.D))
             {
                 Player.IsMovingRight = false;
             }
 
 
-
-            if (Keys_NewlyPressed.Contains(Keys.Space))
+            // Toggling Jump tag
+            if (NewKeys.Contains(Keys.Space))
             {
                 Player.IsJumping = true;
             }
@@ -742,24 +738,26 @@ namespace PixelGame
                 Player.IsJumping = false;
             }
 
-
-
-            if (Keys_NewlyPressed.Contains(Keys.LeftAlt) && !Keys_BeingPressed.Contains(Keys.LeftAlt))
+            
+        }
+        private void UserControl_PlayerMovement_Flight(Keys[] NewKeys)
+        {
+            // Toggling Flight tag
+            if (NewKeys.Contains(Keys.LeftAlt) && !Keys_BeingPressed.Contains(Keys.LeftAlt))
             {
                 PlayerMovement_ToggleFlight();
             }
 
-            
-
-            if (Keys_NewlyPressed.Contains(Keys.W) && !Keys_NewlyPressed.Contains(Keys.S) && Player.IsFlying)
+            // Assigning value to player Flight Movement tags
+            if (NewKeys.Contains(Keys.W) && !NewKeys.Contains(Keys.S) && Player.IsFlying)
             {
                 Player.IsFlyingUp = true;
             }
-            else if (Keys_NewlyPressed.Contains(Keys.S) && !Keys_NewlyPressed.Contains(Keys.W) && Player.IsFlying)
+            else if (NewKeys.Contains(Keys.S) && !NewKeys.Contains(Keys.W) && Player.IsFlying)
             {
                 Player.IsFlyingDown = true;
             }
-            if (Keys_NewlyPressed.Contains(Keys.S) && Keys_NewlyPressed.Contains(Keys.W) && Player.IsFlying)
+            if (NewKeys.Contains(Keys.S) && NewKeys.Contains(Keys.W) && Player.IsFlying)
             {
                 if (Keys_BeingPressed.Contains(Keys.S) && !Keys_BeingPressed.Contains(Keys.W))
                 {
@@ -772,17 +770,31 @@ namespace PixelGame
                     Player.IsFlyingUp = false;
                 }
             }
-            if (!Keys_NewlyPressed.Contains(Keys.S) || !Player.IsFlying)
+            if (!NewKeys.Contains(Keys.S) || !Player.IsFlying)
             {
                 Player.IsFlyingDown = false;
             }
-            if (!Keys_NewlyPressed.Contains(Keys.W) || !Player.IsFlying)
+            if (!NewKeys.Contains(Keys.W) || !Player.IsFlying)
             {
                 Player.IsFlyingUp = false;
             }
+        }
+
+        #endregion
+
+        #region Keybinds
+
+        private void KeyBind_Handler()
+        {
+            Keys[] Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys();
+
+
+            UserControl_PlayerMovement(Keys_NewlyPressed);
+            UserControl_PlayerMovement_Flight(Keys_NewlyPressed);
 
 
 
+            // Toggling FullScreen
             if (Keys_NewlyPressed.Contains(Keys.F) && !Keys_BeingPressed.Contains(Keys.F))
             {
                 Window_ToggleFullScreen();
