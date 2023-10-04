@@ -692,6 +692,29 @@ namespace PixelGame
             }
         }
 
+        #endregion
+
+        #region Keybinds
+
+        private void KeyBind_Handler()
+        {
+            Keys[] Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys();
+
+
+            UserControl_PlayerMovement(Keys_NewlyPressed);
+            UserControl_PlayerMovement_Flight(Keys_NewlyPressed);
+
+
+
+            // Toggling FullScreen
+            if (Keys_NewlyPressed.Contains(Keys.F) && !Keys_BeingPressed.Contains(Keys.F))
+            {
+                Window_ToggleFullScreen();
+            }
+
+            Keys_BeingPressed = new List<Keys>(Keys_NewlyPressed);
+        }
+
         private void UserControl_PlayerMovement(Keys[] NewKeys)
         {
             // Assigning value to player movement tags
@@ -738,7 +761,7 @@ namespace PixelGame
                 Player.IsJumping = false;
             }
 
-            
+
         }
         private void UserControl_PlayerMovement_Flight(Keys[] NewKeys)
         {
@@ -778,29 +801,6 @@ namespace PixelGame
             {
                 Player.IsFlyingUp = false;
             }
-        }
-
-        #endregion
-
-        #region Keybinds
-
-        private void KeyBind_Handler()
-        {
-            Keys[] Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys();
-
-
-            UserControl_PlayerMovement(Keys_NewlyPressed);
-            UserControl_PlayerMovement_Flight(Keys_NewlyPressed);
-
-
-
-            // Toggling FullScreen
-            if (Keys_NewlyPressed.Contains(Keys.F) && !Keys_BeingPressed.Contains(Keys.F))
-            {
-                Window_ToggleFullScreen();
-            }
-
-            Keys_BeingPressed = new List<Keys>(Keys_NewlyPressed);
         }
 
         #endregion
