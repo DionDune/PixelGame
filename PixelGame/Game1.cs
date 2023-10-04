@@ -686,7 +686,7 @@ namespace PixelGame
                 Player.Momentum_Vertical = 0;
             }
         }
-
+        
 
         private void PlayerMovement_ToggleFlight()
         {
@@ -699,7 +699,7 @@ namespace PixelGame
 
         private void KeyBind_Handler()
         {
-            List<Keys> Keys_NewlyPressed = new List<Keys>(Keyboard.GetState().GetPressedKeys());
+            Keys[] Keys_NewlyPressed = Keyboard.GetState().GetPressedKeys();
 
             if (Keys_NewlyPressed.Contains(Keys.A) && !Keys_NewlyPressed.Contains(Keys.D))
             {
@@ -788,7 +788,7 @@ namespace PixelGame
                 Window_ToggleFullScreen();
             }
 
-            Keys_BeingPressed = Keys_NewlyPressed;
+            Keys_BeingPressed = new List<Keys>(Keys_NewlyPressed);
         }
 
         #endregion
