@@ -540,8 +540,8 @@ namespace PixelGame
 
             if (gameTick % GravityEffectInterval == 0 && !Player.IsFlying)
             {
-                if (GetPhysicsType(CheckLineCollision(Player.x, Player.y + Player.Height + 1,
-                                                    Player.x + Player.Width, Player.y + Player.Height + 1,
+                if (GetPhysicsType(CheckLineCollision(Player.x, Player.y + Player.Height,
+                                                    Player.x + (Player.Width - 1), Player.y + Player.Height,
                                                     TileWidth)) == 0)
                 {
                     Player.Momentum_Vertical += 1;
@@ -552,7 +552,7 @@ namespace PixelGame
             if (Player.Momentum_Vertical > 0)
             {
                 (int, int) CollisionDetails = CheckCubeCollision(Player.x, Player.y + Player.Height,
-                                                                    Player.x + Player.Width, Player.y + Player.Height,
+                                                                    Player.x + (Player.Width - 1), Player.y + Player.Height,
                                                                     "Down", Player.Momentum_Vertical);
 
                 Player.y += CollisionDetails.Item1;
@@ -656,7 +656,7 @@ namespace PixelGame
             if (Player.IsJumping || (Player.IsFlying && Player.IsFlyingUp))
             {
                 (int, int) CollisionDetails = CheckCubeCollision(Player.x, Player.y + Player.Height,
-                                                                    Player.x + Player.Width, Player.y + Player.Height,
+                                                                    Player.x + (Player.Width - 1), Player.y + Player.Height,
                                                                     "Down", 1);
 
 
