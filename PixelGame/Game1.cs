@@ -846,13 +846,23 @@ namespace PixelGame
             PlayerMovementHandler();
             Execute_BlockLoadBoundary();
 
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+
+            try
             {
-                World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = new Tile()
+                if (Mouse.GetState().RightButton == ButtonState.Pressed)
                 {
-                    Type = 1
-                };
+                    World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = new Tile()
+                    {
+                        Type = 1
+                    };
+                }
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = null;
+                }
             }
+            catch { }
+
 
             gameTick++;
 
