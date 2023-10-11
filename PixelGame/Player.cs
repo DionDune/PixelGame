@@ -32,6 +32,9 @@ namespace PixelGame
         public int JumpHeight { get; set; }
         public int JumpHeight_Shift { get; set; }
 
+        public bool IsShifting { get; set; }
+        public bool IsCrouching { get; set; }
+
         public bool IsFlying { get; set; }
 
         public bool IsMovingLeft { get; set; }
