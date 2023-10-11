@@ -658,7 +658,7 @@ namespace PixelGame
                 }
             }
             //Slowdown
-            if ((!Player.IsMovingLeft && !Player.IsMovingRight) || (Math.Abs(Player.Momentum_Horizontal) > CurrentSpeedMax) && gameTick % 4 == 0)
+            if (((!Player.IsMovingLeft && !Player.IsMovingRight) || (Math.Abs(Player.Momentum_Horizontal) > CurrentSpeedMax)) && gameTick % 3 == 0)
             {
                 if (Player.Momentum_Horizontal < 0)
                 {
