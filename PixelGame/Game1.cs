@@ -109,7 +109,10 @@ namespace PixelGame
 
                 Speed_Crouch = 1 / 4f,
                 Speed_Base = 1 / 3f,
-                Speed_Shift = 1 / 2f
+                Speed_Shift = 1 / 2f,
+
+                IsCrouching = false,
+                IsShifting = false
             };
             Player.x = (_graphics.PreferredBackBufferWidth / 2) - (Player.Width / 2);
             Player.y = (_graphics.PreferredBackBufferHeight / 2) - (Player.Height / 2);
