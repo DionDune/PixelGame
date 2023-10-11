@@ -20,13 +20,17 @@ namespace PixelGame
         public uint Breath { get; set; }
         public uint Breath_Max { get; set; }
 
-        public int JumpHeight { get; set; }
 
         public int Momentum_Vertical { get; set; }
         public int Momentum_Horizontal { get; set; }
 
+        public float Speed_Crouch { get; set; }
         public float Speed_Base { get; set; }
         public float Speed_Shift { get; set; }
+
+        public int JumpHeight_Crouch { get; set; }
+        public int JumpHeight { get; set; }
+        public int JumpHeight_Shift { get; set; }
 
         public bool IsFlying { get; set; }
 
