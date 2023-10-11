@@ -710,6 +710,7 @@ namespace PixelGame
 
             UserControl_PlayerMovement(Keys_NewlyPressed);
             UserControl_PlayerMovement_Flight(Keys_NewlyPressed);
+            UserControl_PlayerShiftCrouch(Keys_NewlyPressed);
 
 
 
@@ -807,6 +808,33 @@ namespace PixelGame
             if (!NewKeys.Contains(Keys.W) || !Player.IsFlying)
             {
                 Player.IsFlyingUp = false;
+            }
+        }
+        private void UserControl_PlayerShiftCrouch(Keys[] NewKeys)
+        {
+            // Left Shift
+            if (NewKeys.Contains(Keys.LeftShift) && !NewKeys.Contains(Keys.LeftControl))
+            {
+                Player.IsShifting = true;
+                Player.IsCrouching = false;
+            }
+            // Left Control
+            else if (NewKeys.Contains(Keys.LeftControl) && !NewKeys.Contains(Keys.LeftShift))
+            {
+                Player.IsCrouching = true;
+                Player.IsShifting = false;
+            }
+            //Both Pressed
+            else if (NewKeys.Contains(Keys.LeftShift) && NewKeys.Contains(Keys.LeftControl))
+            {
+                Player.IsShifting = true;
+                Player.IsCrouching = false;
+            }
+            // Neither Pressed
+            else if (!NewKeys.Contains(Keys.LeftShift) && !NewKeys.Contains(Keys.LeftControl))
+            {
+                Player.IsShifting = false;
+                Player.IsCrouching = false;
             }
         }
 
