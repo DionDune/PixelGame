@@ -107,7 +107,7 @@ namespace PixelGame
                 JumpHeight = 12,
                 JumpHeight_Shift = 14,
 
-                Speed_Crouch = 1 / 4f,
+                Speed_Crouch = 1 / 5f,
                 Speed_Base = 1 / 3f,
                 Speed_Shift = 1 / 2f,
 
