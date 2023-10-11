@@ -105,7 +105,7 @@ namespace PixelGame
 
                 JumpHeight = 12,
                 Speed_Base = 1 / 3f,
-                Speed_Max = 1 / 2f
+                Speed_Shift = 1 / 2f
             };
             Player.x = (_graphics.PreferredBackBufferWidth / 2) - (Player.Width / 2);
             Player.y = (_graphics.PreferredBackBufferHeight / 2) - (Player.Height / 2);

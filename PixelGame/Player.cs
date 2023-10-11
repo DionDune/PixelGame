@@ -26,7 +26,7 @@ namespace PixelGame
         public int Momentum_Horizontal { get; set; }
 
         public float Speed_Base { get; set; }
-        public float Speed_Max { get; set; }
+        public float Speed_Shift { get; set; }
 
         public bool IsFlying { get; set; }
 
