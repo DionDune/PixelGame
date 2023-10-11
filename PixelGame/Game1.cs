@@ -627,7 +627,19 @@ namespace PixelGame
 
         private void PlayerMovement_Horizontal()
         {
-            int CurrentSpeedMax = (int)Math.Round(Player.Speed_Base * TileWidth, 0);
+            int CurrentSpeedMax = 0;// (int)Math.Round(Player.Speed_Base * TileWidth, 0);
+            if (Player.IsCrouching && !Player.IsShifting)
+            {
+                CurrentSpeedMax = (int)(Player.Speed_Crouch * TileWidth);
+            }
+            else if (Player.IsShifting && !Player.IsCrouching)
+            {
+                CurrentSpeedMax = (int)(Player.Speed_Shift * TileWidth);
+            }
+            else
+            {
+                CurrentSpeedMax = (int)(Player.Speed_Base * TileWidth);
+            }
 
             //Left
             if (Player.IsMovingLeft && !Player.IsMovingRight && gameTick % 3 == 0)
