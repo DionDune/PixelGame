@@ -84,7 +84,7 @@ namespace PixelGame
             gameTick = 0;
 
 
-            GameState = "Play";
+            GameState = "Start";
 
             WorldWidth = 800;
             WorldHeight = 800;
@@ -390,6 +390,19 @@ namespace PixelGame
             });
 
             
+        }
+
+        private void UI_RenderElements(List<UIItem> UIItems)
+        {
+            foreach (UIItem Item in UIItems)
+            {
+                if (Item.Type == "Button")
+                {
+                    _spriteBatch.Draw(Texture_White, new Rectangle(Item.X, Item.Y, Item.Width, Item.Height), Item.BorderColor);
+                    _spriteBatch.Draw(Texture_White, new Rectangle(Item.X + Item.BorderWidth, Item.Y + Item.BorderWidth,
+                                                                   Item.Width - Item.BorderWidth * 2, Item.Height - Item.BorderWidth * 2), Item.BaseColor);
+                }
+            }
         }
 
         #endregion
@@ -993,7 +1006,11 @@ namespace PixelGame
             _spriteBatch.Begin();
 
 
-            if (GameState == "Play")
+            if (GameState == "Start")
+            {
+                UI_RenderElements(UIPages[0].UIItems);
+            }
+            else if (GameState == "Play")
             {
                 //Tiles
                 for (int y = CameraLoadBound_Y_Left; y < CameraLoadBound_Y_Right; y++)
