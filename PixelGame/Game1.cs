@@ -410,8 +410,8 @@ namespace PixelGame
         }
         private void UI_RenderTextElements(List<List<bool>> Elements, int CentreX, int CentreY, int elementSize, Color elementColor)
         {
-            int StartX = CentreX - (Elements[0].Count * elementSize);
-            int StartY = CentreY - (Elements.Count * elementSize);
+            int StartX = CentreX - ((Elements[0].Count * elementSize) / 2);
+            int StartY = CentreY - ((Elements.Count * elementSize) / 2);
 
             for (int y = 0; y < Elements.Count; y++)
             {
