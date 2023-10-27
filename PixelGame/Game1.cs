@@ -21,6 +21,7 @@ namespace PixelGame
 
         string GameState;
         List<UIPage> UIPages;
+        UIPage UIPage_Current;
 
         //Textures
         Texture2D Texture_Default;
@@ -58,8 +59,9 @@ namespace PixelGame
         //Player
         Player Player = new Player();
 
-        //Keys
+        //Keys/Mouse
         List<Keys> Keys_BeingPressed = new List<Keys>();
+        bool MouseClicking_Left;
 
         #endregion
 
@@ -129,6 +131,7 @@ namespace PixelGame
             Colors_CreateColours();
 
             UI_GenPages();
+            UIPage_Current = UIPages[0];
 
             base.Initialize();
         }
@@ -811,6 +814,8 @@ namespace PixelGame
         }
 
         #endregion
+
+        /////////////////////////////////////////
 
         #region Keybinds
 
