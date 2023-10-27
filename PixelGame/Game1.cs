@@ -377,7 +377,7 @@ namespace PixelGame
                 {
                     Text = "START NEW",
                     Elements = TextCharacter.GetString("START NEW"),
-                    ElementSize = 5,
+                    ElementSize = 8,
                     Color = Color.Black
                 }
             };

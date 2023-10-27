@@ -338,7 +338,11 @@ namespace PixelGame
                     {
                         Elements[i].Add(b);
                     }
-                    Elements[i].Add(false);
+
+                    if (Text.IndexOf(c) != Text.Length - 1)
+                    {
+                        Elements[i].Add(false);
+                    }
                 }
 
             }
