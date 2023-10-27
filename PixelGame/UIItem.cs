@@ -29,6 +29,8 @@ namespace PixelGame
         public int PercentFull { get; set; }
         public int FillDirection { get; set; }
 
+        TextElement Text { get; set; }
+
         public UIItem()
         {
             Type = "Button";
@@ -50,6 +52,8 @@ namespace PixelGame
 
             PercentFull = 100;
             FillDirection = 0;
+
+            Text = null;
         }
     }
 }
