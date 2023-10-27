@@ -358,7 +358,7 @@ namespace PixelGame
             //Start Button
             UIItem StartButton = new UIItem()
             {
-                Type = "StartButton",
+                Type = "Button",
 
                 X = _graphics.PreferredBackBufferWidth / 2 - 200,
                 Y = _graphics.PreferredBackBufferHeight / 2 - 75,
