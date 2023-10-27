@@ -26,7 +26,11 @@ namespace PixelGame
         public Color BorderColor { get; set; }
         public Color HighlightedColor { get; set; }
 
-        public int PercentFull { get; set; }
+        public int MinValue { get; set; }
+        public int MaxValue { get; set; }
+        public int Value { get; set; }
+        
+        public string Target { get; set; }
         public int FillDirection { get; set; }
 
         TextElement Text { get; set; }
@@ -50,8 +54,13 @@ namespace PixelGame
             BorderColor = Color.Black;
             HighlightedColor = Color.Gold;
 
-            PercentFull = 100;
+            MinValue = 0;
+            MaxValue = 1;
+            Value = 0;
             FillDirection = 0;
+
+            Target = string.Empty;
+
 
             Text = null;
         }
