@@ -315,5 +315,27 @@ namespace PixelGame
 
             return letter;
         }
+
+        public static List<List<bool>> GetString(string Text)
+        {
+            List<List<bool>> Elements = new List<List<bool>>();
+
+            foreach (char c in Text)
+            {
+
+                List<List<bool>> Element = GetLetter(c);
+
+                for (int i = 0; i < Element.Count(); i++)
+                {
+                    foreach (bool b in Element[i])
+                    {
+                        Elements[i].Add(b);
+                    }
+                }
+
+            }
+
+            return Elements;
+        }
     }
 }
