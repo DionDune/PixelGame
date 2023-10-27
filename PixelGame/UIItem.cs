@@ -33,7 +33,7 @@ namespace PixelGame
         public string Target { get; set; }
         public int FillDirection { get; set; }
 
-        TextElement Text { get; set; }
+        public TextElement Text { get; set; }
 
         public UIItem()
         {

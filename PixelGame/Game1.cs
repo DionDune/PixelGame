@@ -20,6 +20,7 @@ namespace PixelGame
         uint gameTick;
 
         string GameState;
+        List<UIPage> UIPages;
 
         //Textures
         Texture2D Texture_Default;
@@ -126,6 +127,8 @@ namespace PixelGame
             GenerateMap_Main();
 
             Colors_CreateColours();
+
+            UI_GenPages();
 
             base.Initialize();
         }
@@ -339,6 +342,54 @@ namespace PixelGame
                     }
                 }
             }
+        }
+
+        #endregion
+
+        /////////////////////////////////////////
+
+        #region UI
+
+        private void UI_GenPages()
+        {
+            UIPages = new List<UIPage>();
+
+
+            //Start Button
+            UIItem StartButton = new UIItem()
+            {
+                Type = "StartButton",
+
+                X = _graphics.PreferredBackBufferWidth / 2 - 200,
+                Y = _graphics.PreferredBackBufferHeight / 2 - 75,
+
+                Width = 400,
+                Height = 150,
+
+                CentreX = _graphics.PreferredBackBufferWidth / 2,
+                CentreY = _graphics.PreferredBackBufferHeight / 2,
+
+                BorderWidth = 5,
+                BorderColor = Color.Green,
+                BaseColor = Color.White,
+
+                Text = new TextElement()
+                {
+                    Text = "START NEW",
+                    Elements = TextCharacter.GetString("START NEW"),
+                    ElementSize = 5,
+                    Color = Color.Black
+                }
+            };
+            //Start
+            UIPages.Add(new UIPage()
+            {
+                Type = "Start",
+
+                UIItems = new List<UIItem>() { StartButton }
+            });
+
+            
         }
 
         #endregion
