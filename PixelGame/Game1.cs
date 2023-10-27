@@ -417,7 +417,10 @@ namespace PixelGame
             {
                 for (int x = 0; x < Elements[0].Count; x++)
                 {
-                    _spriteBatch.Draw(Texture_White, new Rectangle(StartX + (x * elementSize), StartY + (y * elementSize), elementSize, elementSize), elementColor);
+                    if (Elements[y][x])
+                    {
+                        _spriteBatch.Draw(Texture_White, new Rectangle(StartX + (x * elementSize), StartY + (y * elementSize), elementSize, elementSize), elementColor);
+                    }
                 }
             }
         }
