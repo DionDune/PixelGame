@@ -308,6 +308,14 @@ namespace PixelGame
                 letter.Add(new List<bool>() { false, true, false });
                 letter.Add(new List<bool>() { false, false, false });
             }
+            if (Character == ' ')
+            {
+                letter.Add(new List<bool>() { false });
+                letter.Add(new List<bool>() { false });
+                letter.Add(new List<bool>() { false });
+                letter.Add(new List<bool>() { false });
+                letter.Add(new List<bool>() { false });
+            }
 
             return letter;
         }
