@@ -330,6 +330,7 @@ namespace PixelGame
                     {
                         Elements[i].Add(b);
                     }
+                    Elements[i].Add(false);
                 }
 
             }
