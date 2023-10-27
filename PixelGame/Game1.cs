@@ -401,6 +401,10 @@ namespace PixelGame
                     _spriteBatch.Draw(Texture_White, new Rectangle(Item.X, Item.Y, Item.Width, Item.Height), Item.BorderColor);
                     _spriteBatch.Draw(Texture_White, new Rectangle(Item.X + Item.BorderWidth, Item.Y + Item.BorderWidth,
                                                                    Item.Width - Item.BorderWidth * 2, Item.Height - Item.BorderWidth * 2), Item.BaseColor);
+                    if (Item.Text != null)
+                    {
+                        UI_RenderTextElements(Item.Text.Elements, Item.CentreX, Item.CentreY, Item.Text.ElementSize, Item.Text.Color);
+                    }
                 }
             }
         }
