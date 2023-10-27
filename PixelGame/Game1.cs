@@ -382,7 +382,9 @@ namespace PixelGame
                     Elements = TextCharacter.GetString("START NEW"),
                     ElementSize = 8,
                     Color = Color.Black
-                }
+                },
+
+                Target = "Start New"
             };
             //Start
             UIPages.Add(new UIPage()
