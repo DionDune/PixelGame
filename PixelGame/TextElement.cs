@@ -27,8 +27,8 @@ namespace PixelGame
             XOffset = 0;
             YOffset = 0;
 
-            Text = "Example";
-            Elements = new List<List<bool>>();
+            Text = "EXAMPLE";
+            Elements = TextCharacter.GetString(Text);
             ElementSize = 5;
 
             Color = Color.Black;
