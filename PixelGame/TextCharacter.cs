@@ -11,10 +11,6 @@ namespace PixelGame
         public static List<List<bool>> GetLetter(char Character)
         {
             List<List<bool>> letter = new List<List<bool>>();
-            for (int i = 0; i < 5; i++)
-            {
-                letter.Add(new List<bool>());
-            }
 
             if (Character == 'A')
             {
