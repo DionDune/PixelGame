@@ -956,6 +956,37 @@ namespace PixelGame
 
         #endregion
 
+        #region Mouse
+
+        private void MouseClick_Handler()
+        {
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                if (!MouseClicking_Left)
+                {
+                    foreach (UIItem Item in UIPage_Current.UIItems)
+                    {
+                        if (Item.Type == "Button")
+                        {
+                            if (Mouse.GetState().X > Item.X && Mouse.GetState().X < Item.X + Item.Width &&
+                                Mouse.GetState().Y > Item.Y && Mouse.GetState().Y < Item.Y + Item.Height)
+                            {
+
+                            }
+                        }
+                    }
+                }
+
+                MouseClicking_Left = true;
+            }
+            else
+            {
+                MouseClicking_Left = false;
+            }
+        }
+
+        #endregion
+
         /////////////////////////////////////////
 
         #region Fundamentals
@@ -994,6 +1025,7 @@ namespace PixelGame
         protected override void Update(GameTime gameTime)
         {
             KeyBind_Handler();
+            MouseClick_Handler();
 
             if (GameState == "Play")
             {
