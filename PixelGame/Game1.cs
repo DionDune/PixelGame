@@ -971,7 +971,7 @@ namespace PixelGame
                             if (Mouse.GetState().X > Item.X && Mouse.GetState().X < Item.X + Item.Width &&
                                 Mouse.GetState().Y > Item.Y && Mouse.GetState().Y < Item.Y + Item.Height)
                             {
-
+                                UserControl_ButtonPress(Item.Target);
                             }
                         }
                     }
@@ -982,6 +982,14 @@ namespace PixelGame
             else
             {
                 MouseClicking_Left = false;
+            }
+        }
+
+        private void UserControl_ButtonPress(string Data)
+        {
+            if (Data == "Start New")
+            {
+                GameState = "Play";
             }
         }
 
