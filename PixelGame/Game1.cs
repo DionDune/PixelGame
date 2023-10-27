@@ -404,6 +404,16 @@ namespace PixelGame
                 }
             }
         }
+        private void UI_RenderTextElements(List<List<bool>> Elements, int StartX, int StartY, int elementSize, Color elementColor)
+        {
+            for (int y = 0; y < Elements.Count; y++)
+            {
+                for (int x = 0; x < Elements[0].Count; x++)
+                {
+                    _spriteBatch.Draw(Texture_White, new Rectangle(StartX + (x * elementSize), StartY + (y * elementSize), elementSize, elementSize), elementColor);
+                }
+            }
+        }
 
         #endregion
 
