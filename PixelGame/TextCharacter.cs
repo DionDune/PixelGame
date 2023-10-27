@@ -319,10 +319,13 @@ namespace PixelGame
         public static List<List<bool>> GetString(string Text)
         {
             List<List<bool>> Elements = new List<List<bool>>();
+            foreach (List<bool> Lst in TextCharacter.GetLetter('A'))
+            {
+                Elements.Add(new List<bool>());
+            }
 
             foreach (char c in Text)
             {
-
                 List<List<bool>> Element = GetLetter(c);
 
                 for (int i = 0; i < Element.Count(); i++)
