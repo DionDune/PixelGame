@@ -19,6 +19,8 @@ namespace PixelGame
         Random random = new Random();
         uint gameTick;
 
+        string GameState;
+
         //Textures
         Texture2D Texture_Default;
         Texture2D Texture_White;
@@ -80,6 +82,8 @@ namespace PixelGame
         {
             gameTick = 0;
 
+
+            GameState = "Play";
 
             WorldWidth = 800;
             WorldHeight = 800;
@@ -901,25 +905,28 @@ namespace PixelGame
         protected override void Update(GameTime gameTime)
         {
             KeyBind_Handler();
-            PlayerMovementHandler();
-            Execute_BlockLoadBoundary();
 
-
-            try
+            if (GameState == "Play")
             {
-                if (Mouse.GetState().RightButton == ButtonState.Pressed)
+                PlayerMovementHandler();
+                Execute_BlockLoadBoundary();
+
+                try
                 {
-                    World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = new Tile()
+                    if (Mouse.GetState().RightButton == ButtonState.Pressed)
                     {
-                        Type = 1
-                    };
+                        World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = new Tile()
+                        {
+                            Type = 1
+                        };
+                    }
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = null;
+                    }
                 }
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-                {
-                    World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = null;
-                }
+                catch { }
             }
-            catch { }
 
 
             gameTick++;
@@ -934,20 +941,25 @@ namespace PixelGame
             // BEGIN Draw ----
             _spriteBatch.Begin();
 
-            //Tiles
-            for (int y = CameraLoadBound_Y_Left; y < CameraLoadBound_Y_Right; y++)
+
+            if (GameState == "Play")
             {
-                for (int x = CameraLoadBound_X_Left; x < CameraLoadBound_X_Right; x++)
+                //Tiles
+                for (int y = CameraLoadBound_Y_Left; y < CameraLoadBound_Y_Right; y++)
                 {
-                    if (World[y][x] != null)
+                    for (int x = CameraLoadBound_X_Left; x < CameraLoadBound_X_Right; x++)
                     {
-                        _spriteBatch.Draw(Texture_White, getRect(x, y), Texture_GetTileColor(World[y][x].Type));
+                        if (World[y][x] != null)
+                        {
+                            _spriteBatch.Draw(Texture_White, getRect(x, y), Texture_GetTileColor(World[y][x].Type));
+                        }
                     }
                 }
-            }
 
-            //Player
-            _spriteBatch.Draw(Texture_White, new Rectangle(Player.x - CameraOffset_X, Player.y - CameraOffset_Y, Player.Width, Player.Height), Color.Red);
+                //Player
+                _spriteBatch.Draw(Texture_White, new Rectangle(Player.x - CameraOffset_X, Player.y - CameraOffset_Y, Player.Width, Player.Height), Color.Red);
+            }
+            
 
             _spriteBatch.End();
             // END Draw ------
