@@ -1059,6 +1059,10 @@ namespace PixelGame
             {
                 GameState = "Play";
             }
+            else if (Data == "Quit")
+            {
+                System.Environment.Exit(0);
+            }
         }
 
         #endregion
