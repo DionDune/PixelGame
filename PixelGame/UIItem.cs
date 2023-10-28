@@ -10,6 +10,7 @@ namespace PixelGame
     internal class UIItem
     {
         public string Type { get; set; }
+        public bool Highlighted { get; set; }
 
         public int X { get; set; }
         public int Y { get; set; }
@@ -38,6 +39,7 @@ namespace PixelGame
         public UIItem()
         {
             Type = "Button";
+            Highlighted = false;
 
             X = 0;
             Y = 0;
