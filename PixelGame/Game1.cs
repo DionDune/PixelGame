@@ -374,7 +374,7 @@ namespace PixelGame
 
                 BorderWidth = 5,
                 BorderColor = Color.Green,
-                BaseColor = Color.White,
+                BaseColor = Color.PaleGreen,
 
                 Text = new TextElement()
                 {
@@ -414,7 +414,8 @@ namespace PixelGame
 
                 Target = "Quit"
             };
-            //Start
+
+            //Start Page
             UIPages.Add(new UIPage()
             {
                 Type = "Start",
