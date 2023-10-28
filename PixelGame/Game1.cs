@@ -386,12 +386,40 @@ namespace PixelGame
 
                 Target = "Start New"
             };
+            //Start Quit Button
+            UIItem StartQuitButton = new UIItem()
+            {
+                Type = "Button",
+
+                X = _graphics.PreferredBackBufferWidth / 2 - 200,
+                Y = _graphics.PreferredBackBufferHeight / 2 - 75 + 175,
+
+                Width = 400,
+                Height = 150,
+
+                CentreX = _graphics.PreferredBackBufferWidth / 2,
+                CentreY = _graphics.PreferredBackBufferHeight / 2 + 175,
+
+                BorderWidth = 5,
+                BorderColor = Color.DarkRed,
+                BaseColor = Color.Red,
+
+                Text = new TextElement()
+                {
+                    Text = "QUIT",
+                    Elements = TextCharacter.GetString("QUIT"),
+                    ElementSize = 8,
+                    Color = Color.Black
+                },
+
+                Target = "Quit"
+            };
             //Start
             UIPages.Add(new UIPage()
             {
                 Type = "Start",
 
-                UIItems = new List<UIItem>() { StartButton }
+                UIItems = new List<UIItem>() { StartButton, StartQuitButton }
             });
 
             
