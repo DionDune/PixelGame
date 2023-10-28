@@ -438,6 +438,17 @@ namespace PixelGame
                 }
             }
         }
+        private void UI_ItemToggleHighlight(UIItem item, bool toHighlight)
+        {
+            if (toHighlight)
+            {
+                item.Highlighted = true;
+            }
+            else
+            {
+                item.Highlighted = false;
+            }
+        }
 
         #endregion
 
@@ -995,6 +1006,7 @@ namespace PixelGame
                 MouseClicking_Left = false;
             }
         }
+       
 
         private void UserControl_ButtonPress(string Data)
         {
