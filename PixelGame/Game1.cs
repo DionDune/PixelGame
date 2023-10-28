@@ -1006,7 +1006,24 @@ namespace PixelGame
                 MouseClicking_Left = false;
             }
         }
-       
+        private void MouseMove_Handler()
+        {
+            foreach (UIItem Item in UIPage_Current.UIItems)
+            {
+                if (Item.Type == "Button")
+                {
+                    if (Mouse.GetState().X > Item.X && Mouse.GetState().X < Item.X + Item.Width &&
+                                Mouse.GetState().Y > Item.Y && Mouse.GetState().Y < Item.Y + Item.Height)
+                    {
+                        UI_ItemToggleHighlight(Item, true);
+                    }
+                    else
+                    {
+                        UI_ItemToggleHighlight(Item, false);
+                    }
+                }
+            }
+        }
 
         private void UserControl_ButtonPress(string Data)
         {
@@ -1057,6 +1074,7 @@ namespace PixelGame
         {
             KeyBind_Handler();
             MouseClick_Handler();
+            MouseMove_Handler();
 
             if (GameState == "Play")
             {
