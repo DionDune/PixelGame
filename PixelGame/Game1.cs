@@ -363,14 +363,14 @@ namespace PixelGame
             {
                 Type = "Button",
 
-                X = _graphics.PreferredBackBufferWidth / 2 - 200,
-                Y = _graphics.PreferredBackBufferHeight / 2 - 75,
+                X = -200,
+                Y = - 75,
 
                 Width = 400,
                 Height = 150,
 
-                CentreX = _graphics.PreferredBackBufferWidth / 2,
-                CentreY = _graphics.PreferredBackBufferHeight / 2,
+                CentreX = -200 + (400 / 2),
+                CentreY = -75 + (150 / 2),
 
                 BorderWidth = 5,
                 BorderColor = Color.Green,
@@ -391,14 +391,14 @@ namespace PixelGame
             {
                 Type = "Button",
 
-                X = _graphics.PreferredBackBufferWidth / 2 - 200,
-                Y = _graphics.PreferredBackBufferHeight / 2 - 75 + 175,
+                X = -200,
+                Y = -75 + 175,
 
                 Width = 400,
                 Height = 150,
 
-                CentreX = _graphics.PreferredBackBufferWidth / 2,
-                CentreY = _graphics.PreferredBackBufferHeight / 2 + 175,
+                CentreX = -200 + (400 / 2),
+                CentreY = 100 + (150 / 2),
 
                 BorderWidth = 5,
                 BorderColor = Color.DarkRed,
@@ -432,21 +432,26 @@ namespace PixelGame
             {
                 if (Item.Type == "Button")
                 {
-                    _spriteBatch.Draw(Texture_White, new Rectangle(Item.X, Item.Y, Item.Width, Item.Height), Item.BorderColor);
+                    int X = _graphics.PreferredBackBufferWidth / 2 + Item.X;
+                    int Y = _graphics.PreferredBackBufferHeight / 2 + Item.Y;
+                    int CentreX = _graphics.PreferredBackBufferWidth / 2 + Item.CentreX;
+                    int CentreY = _graphics.PreferredBackBufferHeight / 2 + Item.CentreY;
+
+                    _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Item.Width, Item.Height), Item.BorderColor);
                     if (!Item.Highlighted)
                     {
-                        _spriteBatch.Draw(Texture_White, new Rectangle(Item.X + Item.BorderWidth, Item.Y + Item.BorderWidth,
+                        _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
                                                                    Item.Width - Item.BorderWidth * 2, Item.Height - Item.BorderWidth * 2), Item.BaseColor);
                     }
                     else
                     {
-                        _spriteBatch.Draw(Texture_White, new Rectangle(Item.X + Item.BorderWidth, Item.Y + Item.BorderWidth,
+                        _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
                                                                    Item.Width - Item.BorderWidth * 2, Item.Height - Item.BorderWidth * 2), Item.HighlightedColor);
                     }
                     
                     if (Item.Text != null)
                     {
-                        UI_RenderTextElements(Item.Text.Elements, Item.CentreX, Item.CentreY, Item.Text.ElementSize, Item.Text.Color);
+                        UI_RenderTextElements(Item.Text.Elements, CentreX, CentreY, Item.Text.ElementSize, Item.Text.Color);
                     }
                 }
             }
