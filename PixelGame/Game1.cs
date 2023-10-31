@@ -513,13 +513,35 @@ namespace PixelGame
                 MaxValue = Player.Health_Max,
                 Value = Player.Health
             };
+            //Breath Bar
+            UIItem BreathBar = new UIItem()
+            {
+                Type = "Fillbar",
+
+                Orientation = "Bottom Left",
+                X = 25,
+                Y = -170,
+                Width = 450,
+                Height = 45,
+
+                BorderWidth = 5,
+                BorderColor = Color.LightBlue,
+                BaseColor = Color.Blue,
+                BorderTransparency = 0.75F,
+
+                MinValue = 0,
+                MaxValue = Player.Breath_Max,
+                Value = Player.Breath,
+
+                Data = new List<string>() { "Breath" }
+            };
 
             //In Game Page
             UIPages.Add(new UIPage()
             {
                 Type = "Play",
 
-                UIItems = new List<UIItem>() { HealthBar }
+                UIItems = new List<UIItem>() { HealthBar, BreathBar }
             });
         }
 
