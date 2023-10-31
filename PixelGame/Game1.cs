@@ -652,6 +652,13 @@ namespace PixelGame
                 }
             }
         }
+        private void UI_RenderOutline(Color color, int X, int Y, int Width, int Height, int BorderWidth)
+        {
+            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Width, BorderWidth), color);
+            _spriteBatch.Draw(Texture_White, new Rectangle(X + Width - BorderWidth, Y + BorderWidth, BorderWidth, Height - BorderWidth), color);
+            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y + Height - BorderWidth, Width - BorderWidth, BorderWidth), color);
+            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y + BorderWidth, BorderWidth, Height - (BorderWidth * 2)), color);
+        }
 
         private void UI_ItemToggleHighlight(UIItem item, bool toHighlight)
         {
