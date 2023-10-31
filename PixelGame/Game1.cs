@@ -1226,11 +1226,11 @@ namespace PixelGame
             {
                 foreach (UIPage page in UIPages)
                 {
-                    if (page.Type == "Start")
+                    if (page.Type == GameState)
                     {
                         UI_RenderElements(page.UIItems);
                     }
-                    else if (page.Type == "Pause")
+                    else if (page.Type == GameState)
                     {
                         UI_RenderElements(page.UIItems);
                     }
