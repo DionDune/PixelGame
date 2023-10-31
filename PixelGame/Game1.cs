@@ -1009,8 +1009,12 @@ namespace PixelGame
                 CurrentSpeedMax = (int)(Player.Speed_Base * TileWidth);
             }
 
+
+            int BellowCollisionType = GetPhysicsType(CheckLineCollision(Player.x, Player.y + Player.Health + 1, Player.x + Player.Width, Player.y + Player.Height + 1, TileWidth));
             //Left
-            if (Player.IsMovingLeft && !Player.IsMovingRight && gameTick % 3 == 0)
+            if (Player.IsMovingLeft && !Player.IsMovingRight && 
+                ((gameTick % 3 == 0 && BellowCollisionType == 0) || (gameTick % 2 == 0 &&
+                 BellowCollisionType == 2)))
             {
                 if (Player.Momentum_Horizontal > -CurrentSpeedMax)
                 {
@@ -1018,7 +1022,9 @@ namespace PixelGame
                 }
             }
             //Right
-            if (Player.IsMovingRight && !Player.IsMovingLeft && gameTick % 3 == 0)
+            if (Player.IsMovingRight && !Player.IsMovingLeft &&
+                ((gameTick % 3 == 0 && BellowCollisionType == 0) || (gameTick % 2 == 0 &&
+                 BellowCollisionType == 2)))
             {
                 if (Player.Momentum_Horizontal < CurrentSpeedMax)
                 {
