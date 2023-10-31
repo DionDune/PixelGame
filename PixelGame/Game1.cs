@@ -495,13 +495,47 @@ namespace PixelGame
         {
             foreach (UIItem Item in UIItems)
             {
+                int OrientatePosX = _graphics.PreferredBackBufferWidth / 2;
+                int OrientatePosY = _graphics.PreferredBackBufferHeight / 2;
+                switch (Item.Orientation)
+                {
+                    case "Bottom Left":
+                        OrientatePosX = 0;
+                        OrientatePosY = _graphics.PreferredBackBufferHeight;
+                        break;
+                    case "Left":
+                        OrientatePosX = 0;
+                        break;
+                    case "Top Left":
+                        OrientatePosX = 0;
+                        OrientatePosY = 0;
+                        break;
+                    case "Top":
+                        OrientatePosY = 0;
+                        break;
+                    case "Top Right":
+                        OrientatePosX = _graphics.PreferredBackBufferWidth;
+                        OrientatePosY = 0;
+                        break;
+                    case "Right":
+                        OrientatePosX = _graphics.PreferredBackBufferWidth;
+                        break;
+                    case "Bottom Right":
+                        OrientatePosX = _graphics.PreferredBackBufferWidth;
+                        OrientatePosY = _graphics.PreferredBackBufferHeight;
+                        break;
+                    case "Bottom":
+                        OrientatePosY = _graphics.PreferredBackBufferHeight;
+                        break;
+                }
+
+                int X = OrientatePosX + Item.X;
+                int Y = OrientatePosY + Item.Y;
+                int CentreX = OrientatePosX + Item.CentreX;
+                int CentreY = OrientatePosY + Item.CentreY;
+
                 if (Item.Type == "Button")
                 {
-                    int X = _graphics.PreferredBackBufferWidth / 2 + Item.X;
-                    int Y = _graphics.PreferredBackBufferHeight / 2 + Item.Y;
-                    int CentreX = _graphics.PreferredBackBufferWidth / 2 + Item.CentreX;
-                    int CentreY = _graphics.PreferredBackBufferHeight / 2 + Item.CentreY;
-
                     _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Item.Width, Item.Height), Item.BorderColor);
                     if (!Item.Highlighted)
                     {
