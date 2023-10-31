@@ -1230,10 +1230,6 @@ namespace PixelGame
                     {
                         UI_RenderElements(page.UIItems);
                     }
-                    else if (page.Type == GameState)
-                    {
-                        UI_RenderElements(page.UIItems);
-                    }
                 }
                 
             }
