@@ -31,6 +31,7 @@ namespace PixelGame
         public Color HighlightedColor { get; set; }
 
         public float BorderTransparency { get; set; }
+        public float SubBorderTransparency { get; set; }
         public float BaseTransparency { get; set; }
 
         public int MinValue { get; set; }

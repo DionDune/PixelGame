@@ -512,6 +512,8 @@ namespace PixelGame
                 BorderColor = new Color(210, 0, 0),
                 SubBorderColor = Color.White,
                 BaseColor = Color.Red,
+
+                SubBorderTransparency = 0.85F,
                 BorderTransparency = 0.85F,
                 BaseTransparency = 1F,
 
@@ -536,6 +538,8 @@ namespace PixelGame
                 BorderColor = Color.LightBlue,
                 SubBorderColor = Color.White,
                 BaseColor = Color.Blue,
+
+                SubBorderTransparency = 0.75F,
                 BorderTransparency = 0.75F,
                 BaseTransparency = 0.85F,
 
@@ -624,7 +628,7 @@ namespace PixelGame
                     //Inner
                     _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
                                                                    Item.Width - Item.BorderWidth * 2, Item.Height - Item.BorderWidth * 2), 
-                                                                   Item.SubBorderColor * Item.BorderTransparency);
+                                                                   Item.SubBorderColor * Item.SubBorderTransparency);
                     //Bar
                     _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
                                                                    (int)((Item.Value - Item.MinValue) / (float)Item.MaxValue * (Item.Width - Item.BorderWidth * 2)),
