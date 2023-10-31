@@ -384,7 +384,7 @@ namespace PixelGame
                     Color = Color.Black
                 },
 
-                Target = "Start New"
+                Data = new List<string>() { "Start New" }
             };
             //Start Quit Button
             UIItem StartQuitButton = new UIItem()
@@ -412,7 +412,7 @@ namespace PixelGame
                     Color = Color.Black
                 },
 
-                Target = "Quit"
+                Data = new List<string>() { "Quit" }
             };
 
             //Start Page
@@ -1022,7 +1022,7 @@ namespace PixelGame
                             if (Mouse.GetState().X > Item.X && Mouse.GetState().X < Item.X + Item.Width &&
                                 Mouse.GetState().Y > Item.Y && Mouse.GetState().Y < Item.Y + Item.Height)
                             {
-                                UserControl_ButtonPress(Item.Target);
+                                UserControl_ButtonPress(Item.Data);
                             }
                         }
                     }
@@ -1054,13 +1054,13 @@ namespace PixelGame
             }
         }
 
-        private void UserControl_ButtonPress(string Data)
+        private void UserControl_ButtonPress(List<string> Data)
         {
-            if (Data == "Start New")
+            if (Data.Contains("Start New"))
             {
                 GameState = "Play";
             }
-            else if (Data == "Quit")
+            else if (Data.Contains("Quit"))
             {
                 System.Environment.Exit(0);
             }

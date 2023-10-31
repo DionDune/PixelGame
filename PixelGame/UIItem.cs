@@ -31,7 +31,7 @@ namespace PixelGame
         public int MaxValue { get; set; }
         public int Value { get; set; }
         
-        public string Target { get; set; }
+        public List<string> Data { get; set; }
         public int FillDirection { get; set; }
 
         public TextElement Text { get; set; }
@@ -61,7 +61,7 @@ namespace PixelGame
             Value = 0;
             FillDirection = 0;
 
-            Target = string.Empty;
+            Data = null;
 
 
             Text = null;
