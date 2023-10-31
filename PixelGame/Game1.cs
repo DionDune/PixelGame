@@ -512,6 +512,14 @@ namespace PixelGame
                 MaxValue = Player.Health_Max,
                 Value = Player.Health
             };
+
+            //In Game Page
+            UIPages.Add(new UIPage()
+            {
+                Type = "Play",
+
+                UIItems = new List<UIItem>() { HealthBar }
+            });
         }
 
         private void UI_RenderElements(List<UIItem> UIItems)
