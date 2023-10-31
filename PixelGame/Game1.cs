@@ -521,8 +521,10 @@ namespace PixelGame
             }
         }
 
-        private void UI_UpdateCurrentPage()
+        private void UI_ChangePage(string PageType)
         {
+            GameState = PageType;
+
             if (UIPage_Current != null)
             {
                 foreach (UIPage page in UIPages)
@@ -530,7 +532,7 @@ namespace PixelGame
                     if (page.Type == GameState)
                     {
                         UIPage_Current = page;
-                    } 
+                    }
                 }
             }
         }
@@ -1070,24 +1072,12 @@ namespace PixelGame
         {
             if (GameState == "Play")
             {
-                GameState = "Pause";
-
-                foreach (UIPage page in UIPages)
-                {
-                    if (page.Type == GameState)
-                    {
-                        //UIPage_Current = page;
-                    }
-                }
+                UI_ChangePage("Pause");
             }
             else if (GameState == "Pause")
             {
-                GameState = "Play";
-
-                UIPage_Current = null;
+                UI_ChangePage("Play");
             }
-
-            UI_UpdateCurrentPage();
         }
 
         #endregion
@@ -1155,11 +1145,11 @@ namespace PixelGame
         {
             if (Data.Contains("Start New"))
             {
-                GameState = "Play";
+                UI_ChangePage("Play");
             }
             else if (Data.Contains("Resume"))
             {
-                GameState = "Play";
+                UI_ChangePage("Play");
             }
             else if (Data.Contains("Quit"))
             {
