@@ -423,7 +423,44 @@ namespace PixelGame
                 UIItems = new List<UIItem>() { StartButton, StartQuitButton }
             });
 
+
             
+            //Resume Button
+            UIItem ResumeButton = new UIItem()
+            {
+                Type = "Button",
+
+                X = -200,
+                Y = -275,
+
+                Width = 400,
+                Height = 150,
+
+                CentreX = -200 + (400 / 2),
+                CentreY = -275 + (150 / 2),
+
+                BorderWidth = 5,
+                BorderColor = Color.Green,
+                BaseColor = Color.White,
+
+                Text = new TextElement()
+                {
+                    Text = "RESUME",
+                    Elements = TextCharacter.GetString("RESUME"),
+                    ElementSize = 8,
+                    Color = Color.Black
+                },
+
+                Data = new List<string>() { "Resume" }
+            };
+
+            //Pause Page
+            UIPages.Add(new UIPage()
+            {
+                Type = "Pause",
+
+                UIItems = new List<UIItem>() { ResumeButton }
+            });
         }
 
         private void UI_RenderElements(List<UIItem> UIItems)
