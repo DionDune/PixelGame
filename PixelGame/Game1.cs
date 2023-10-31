@@ -584,6 +584,13 @@ namespace PixelGame
                         UI_RenderTextElements(Item.Text.Elements, CentreX, CentreY, Item.Text.ElementSize, Item.Text.Color);
                     }
                 }
+                if (Item.Type == "Fillbar")
+                {
+                    _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Item.Width, Item.Height), Item.BorderColor);
+                    _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
+                                                                   ((Item.Value - Item.MinValue) / Item.MaxValue) * (Item.Width - Item.BorderWidth * 2),
+                                                                   Item.Height - Item.BorderWidth * 2), Item.BaseColor);
+                }
             }
         }
         private void UI_RenderTextElements(List<List<bool>> Elements, int CentreX, int CentreY, int elementSize, Color elementColor)
