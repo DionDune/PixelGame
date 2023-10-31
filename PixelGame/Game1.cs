@@ -513,7 +513,7 @@ namespace PixelGame
                 SubBorderColor = Color.White,
                 BaseColor = Color.Red,
 
-                SubBorderTransparency = 0.85F,
+                SubBorderTransparency = 0.75F,
                 BorderTransparency = 0.85F,
                 BaseTransparency = 1F,
 
