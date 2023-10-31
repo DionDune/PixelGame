@@ -16,10 +16,15 @@ namespace PixelGame
 
         public int Health { get; set; }
         public int Health_Max { get; set; }
+        public int HealthRedgainAmount { get; set; }
+        public int HealthRegainInterval { get; set; }
 
         public int Breath { get; set; }
         public int Breath_Max { get; set; }
+        public int BreathRegainAmount { get; set; }
+        public int BreathRegainInterval { get; set; }
 
+        
 
         public int Momentum_Vertical { get; set; }
         public int Momentum_Horizontal { get; set; }
