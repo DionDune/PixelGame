@@ -14,11 +14,11 @@ namespace PixelGame
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public uint Health { get; set; }
-        public uint Health_Max { get; set; }
+        public int Health { get; set; }
+        public int Health_Max { get; set; }
 
-        public uint Breath { get; set; }
-        public uint Breath_Max { get; set; }
+        public int Breath { get; set; }
+        public int Breath_Max { get; set; }
 
 
         public int Momentum_Vertical { get; set; }
