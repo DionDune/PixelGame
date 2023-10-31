@@ -505,7 +505,8 @@ namespace PixelGame
                 Height = 75,
 
                 BorderWidth = 5,
-                BorderColor = Color.White,
+                BorderColor = new Color(210, 0, 0),
+                SubBorderColor = Color.White,
                 BaseColor = Color.Red,
                 BorderTransparency = 0.85F,
                 BaseTransparency = 1F,
@@ -529,6 +530,7 @@ namespace PixelGame
 
                 BorderWidth = 5,
                 BorderColor = Color.LightBlue,
+                SubBorderColor = Color.White,
                 BaseColor = Color.Blue,
                 BorderTransparency = 0.75F,
                 BaseTransparency = 0.85F,
