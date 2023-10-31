@@ -588,7 +588,7 @@ namespace PixelGame
                 {
                     _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Item.Width, Item.Height), Item.BorderColor);
                     _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
-                                                                   ((Item.Value - Item.MinValue) / Item.MaxValue) * (Item.Width - Item.BorderWidth * 2),
+                                                                   (int)((Item.Value - Item.MinValue) / (float)Item.MaxValue * (Item.Width - Item.BorderWidth * 2)),
                                                                    Item.Height - Item.BorderWidth * 2), Item.BaseColor);
                 }
             }
