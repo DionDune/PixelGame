@@ -508,6 +508,7 @@ namespace PixelGame
                 BorderColor = Color.White,
                 BaseColor = Color.Red,
                 BorderTransparency = 0.85F,
+                BaseTransparency = 1F,
 
                 MinValue = 0,
                 MaxValue = Player.Health_Max,
@@ -530,6 +531,7 @@ namespace PixelGame
                 BorderColor = Color.LightBlue,
                 BaseColor = Color.Blue,
                 BorderTransparency = 0.75F,
+                BaseTransparency = 0.85F,
 
                 MinValue = 0,
                 MaxValue = Player.Breath_Max,
@@ -614,7 +616,7 @@ namespace PixelGame
                     _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Item.Width, Item.Height), Item.BorderColor * Item.BorderTransparency);
                     _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
                                                                    (int)((Item.Value - Item.MinValue) / (float)Item.MaxValue * (Item.Width - Item.BorderWidth * 2)),
-                                                                   Item.Height - Item.BorderWidth * 2), Item.BaseColor);
+                                                                   Item.Height - Item.BorderWidth * 2), Item.BaseColor * Item.BaseTransparency);
                 }
             }
         }
