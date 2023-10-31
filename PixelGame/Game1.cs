@@ -624,7 +624,8 @@ namespace PixelGame
                 if (Item.Type == "Fillbar")
                 {
                     //Border
-                    _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Item.Width, Item.Height), Item.BorderColor * Item.BorderTransparency);
+                    UI_RenderOutline(Item.BorderColor, X, Y, Item.Width, Item.Height, Item.BorderWidth, Item.BorderTransparency);
+                    //_spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Item.Width, Item.Height), Item.BorderColor * Item.BorderTransparency);
                     //Inner
                     _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
                                                                    Item.Width - Item.BorderWidth * 2, Item.Height - Item.BorderWidth * 2), 
@@ -652,12 +653,12 @@ namespace PixelGame
                 }
             }
         }
-        private void UI_RenderOutline(Color color, int X, int Y, int Width, int Height, int BorderWidth)
+        private void UI_RenderOutline(Color color, int X, int Y, int Width, int Height, int BorderWidth, float BorderTransparency)
         {
-            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Width, BorderWidth), color);
-            _spriteBatch.Draw(Texture_White, new Rectangle(X + Width - BorderWidth, Y + BorderWidth, BorderWidth, Height - BorderWidth), color);
-            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y + Height - BorderWidth, Width - BorderWidth, BorderWidth), color);
-            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y + BorderWidth, BorderWidth, Height - (BorderWidth * 2)), color);
+            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y, Width, BorderWidth), color * BorderTransparency);
+            _spriteBatch.Draw(Texture_White, new Rectangle(X + Width - BorderWidth, Y + BorderWidth, BorderWidth, Height - BorderWidth), color * BorderTransparency);
+            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y + Height - BorderWidth, Width - BorderWidth, BorderWidth), color * BorderTransparency);
+            _spriteBatch.Draw(Texture_White, new Rectangle(X, Y + BorderWidth, BorderWidth, Height - (BorderWidth * 2)), color * BorderTransparency);
         }
 
         private void UI_ItemToggleHighlight(UIItem item, bool toHighlight)
