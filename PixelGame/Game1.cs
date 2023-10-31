@@ -887,6 +887,11 @@ namespace PixelGame
                 Window_ToggleFullScreen();
             }
 
+            if (Keys_NewlyPressed.Contains(Keys.Escape) && !Keys_BeingPressed.Contains(Keys.Escape))
+            {
+                UserControl_TogglePause();
+            }
+
             Keys_BeingPressed = new List<Keys>(Keys_NewlyPressed);
         }
 
@@ -1002,6 +1007,18 @@ namespace PixelGame
             {
                 Player.IsShifting = false;
                 Player.IsCrouching = false;
+            }
+        }
+
+        private void UserControl_TogglePause()
+        {
+            if (GameState == "Play")
+            {
+                GameState = "Pause";
+            }
+            else if (GameState == "Pause")
+            {
+                GameState = "Play";
             }
         }
 
