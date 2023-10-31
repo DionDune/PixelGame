@@ -12,6 +12,7 @@ Controls:
  
   > Other:
 
+     - Escape: Toggle Pause
      - L-Alt: Toggle Flight
      - F: Toggle Fullscreen
      
