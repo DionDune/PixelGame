@@ -453,13 +453,41 @@ namespace PixelGame
 
                 Data = new List<string>() { "Resume" }
             };
+            //Pause Quit Button
+            UIItem PauseQuitButton = new UIItem()
+            {
+                Type = "Button",
+
+                X = -200,
+                Y = -100,
+
+                Width = 400,
+                Height = 150,
+
+                CentreX = -200 + (400 / 2),
+                CentreY = -100 + (150 / 2),
+
+                BorderWidth = 5,
+                BorderColor = Color.DarkRed,
+                BaseColor = Color.Red,
+
+                Text = new TextElement()
+                {
+                    Text = "QUIT",
+                    Elements = TextCharacter.GetString("QUIT"),
+                    ElementSize = 8,
+                    Color = Color.Black
+                },
+
+                Data = new List<string>() { "Quit" }
+            };
 
             //Pause Page
             UIPages.Add(new UIPage()
             {
                 Type = "Pause",
 
-                UIItems = new List<UIItem>() { ResumeButton }
+                UIItems = new List<UIItem>() { ResumeButton, PauseQuitButton }
             });
         }
 
