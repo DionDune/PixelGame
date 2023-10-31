@@ -1265,6 +1265,8 @@ namespace PixelGame
             // BEGIN Draw ----
             _spriteBatch.Begin();
 
+
+            //Ingame
             if (GameState == "Play")
             {
                 //Tiles
@@ -1282,14 +1284,13 @@ namespace PixelGame
                 //Player
                 _spriteBatch.Draw(Texture_White, new Rectangle(Player.x - CameraOffset_X, Player.y - CameraOffset_Y, Player.Width, Player.Height), Color.Red);
             }
-            else
+
+            //UI
+            foreach (UIPage page in UIPages)
             {
-                foreach (UIPage page in UIPages)
+                if (page.Type == GameState)
                 {
-                    if (page.Type == GameState)
-                    {
-                        UI_RenderElements(page.UIItems);
-                    }
+                    UI_RenderElements(page.UIItems);
                 }
                 
             }
