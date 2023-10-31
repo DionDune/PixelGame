@@ -106,9 +106,13 @@ namespace PixelGame
 
                 Health = 100,
                 Health_Max = 200,
+                HealthRedgainAmount = 5,
+                HealthRegainInterval = 5,
 
                 Breath = 1000,
                 Breath_Max = 1000,
+                BreathRegainAmount = 2,
+                BreathRegainInterval = 1,
 
                 JumpHeight_Crouch = 8,
                 JumpHeight = 12,
