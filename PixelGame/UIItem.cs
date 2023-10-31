@@ -12,6 +12,8 @@ namespace PixelGame
         public string Type { get; set; }
         public bool Highlighted { get; set; }
 
+        public string Orientation { get; set; }
+
         public int X { get; set; }
         public int Y { get; set; }
 
@@ -40,6 +42,8 @@ namespace PixelGame
         {
             Type = "Button";
             Highlighted = false;
+
+            Orientation = "Centre";
 
             X = 0;
             Y = 0;
