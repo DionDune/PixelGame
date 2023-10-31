@@ -489,6 +489,29 @@ namespace PixelGame
 
                 UIItems = new List<UIItem>() { ResumeButton, PauseQuitButton }
             });
+
+
+
+            //Health Bar
+            UIItem HealthBar = new UIItem()
+            {
+                Type = "Fillbar",
+
+                Orientation = "Bottom Left",
+                X = 25,
+                Y = -100,
+
+                Width = 250,
+                Height = 75,
+
+                BorderWidth = 5,
+                BorderColor = Color.Gray,
+                BaseColor = Color.Red,
+
+                MinValue = 0,
+                MaxValue = Player.Health_Max,
+                Value = Player.Health
+            };
         }
 
         private void UI_RenderElements(List<UIItem> UIItems)
