@@ -1157,6 +1157,10 @@ namespace PixelGame
             {
                 GameState = "Play";
             }
+            else if (Data.Contains("Resume"))
+            {
+                GameState = "Play";
+            }
             else if (Data.Contains("Quit"))
             {
                 System.Environment.Exit(0);
