@@ -521,6 +521,20 @@ namespace PixelGame
             }
         }
 
+        private void UI_UpdateCurrentPage()
+        {
+            if (UIPage_Current != null)
+            {
+                foreach (UIPage page in UIPages)
+                {
+                    if (page.Type == GameState)
+                    {
+                        UIPage_Current = page;
+                    } 
+                }
+            }
+        }
+
         #endregion
 
         /////////////////////////////////////////
@@ -1057,11 +1071,23 @@ namespace PixelGame
             if (GameState == "Play")
             {
                 GameState = "Pause";
+
+                foreach (UIPage page in UIPages)
+                {
+                    if (page.Type == GameState)
+                    {
+                        //UIPage_Current = page;
+                    }
+                }
             }
             else if (GameState == "Pause")
             {
                 GameState = "Play";
+
+                UIPage_Current = null;
             }
+
+            UI_UpdateCurrentPage();
         }
 
         #endregion
@@ -1074,17 +1100,20 @@ namespace PixelGame
             {
                 if (!MouseClicking_Left)
                 {
-                    foreach (UIItem Item in UIPage_Current.UIItems)
+                    if (UIPage_Current != null)
                     {
-                        int X = _graphics.PreferredBackBufferWidth / 2 + Item.X;
-                        int Y = _graphics.PreferredBackBufferHeight / 2 + Item.Y;
-
-                        if (Item.Type == "Button")
+                        foreach (UIItem Item in UIPage_Current.UIItems)
                         {
-                            if (Mouse.GetState().X > X && Mouse.GetState().X < X + Item.Width &&
-                                Mouse.GetState().Y > Y && Mouse.GetState().Y < Y + Item.Height)
+                            int X = _graphics.PreferredBackBufferWidth / 2 + Item.X;
+                            int Y = _graphics.PreferredBackBufferHeight / 2 + Item.Y;
+
+                            if (Item.Type == "Button")
                             {
-                                UserControl_ButtonPress(Item.Data);
+                                if (Mouse.GetState().X > X && Mouse.GetState().X < X + Item.Width &&
+                                    Mouse.GetState().Y > Y && Mouse.GetState().Y < Y + Item.Height)
+                                {
+                                    UserControl_ButtonPress(Item.Data);
+                                }
                             }
                         }
                     }
@@ -1099,21 +1128,24 @@ namespace PixelGame
         }
         private void MouseMove_Handler()
         {
-            foreach (UIItem Item in UIPage_Current.UIItems)
+            if (UIPage_Current != null)
             {
-                int X = _graphics.PreferredBackBufferWidth / 2 + Item.X;
-                int Y = _graphics.PreferredBackBufferHeight / 2 + Item.Y;
-
-                if (Item.Type == "Button")
+                foreach (UIItem Item in UIPage_Current.UIItems)
                 {
-                    if (Mouse.GetState().X > X && Mouse.GetState().X < X + Item.Width &&
-                                Mouse.GetState().Y > Y && Mouse.GetState().Y < Y + Item.Height)
+                    int X = _graphics.PreferredBackBufferWidth / 2 + Item.X;
+                    int Y = _graphics.PreferredBackBufferHeight / 2 + Item.Y;
+
+                    if (Item.Type == "Button")
                     {
-                        UI_ItemToggleHighlight(Item, true);
-                    }
-                    else
-                    {
-                        UI_ItemToggleHighlight(Item, false);
+                        if (Mouse.GetState().X > X && Mouse.GetState().X < X + Item.Width &&
+                                    Mouse.GetState().Y > Y && Mouse.GetState().Y < Y + Item.Height)
+                        {
+                            UI_ItemToggleHighlight(Item, true);
+                        }
+                        else
+                        {
+                            UI_ItemToggleHighlight(Item, false);
+                        }
                     }
                 }
             }
