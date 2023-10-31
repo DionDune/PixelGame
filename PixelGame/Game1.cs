@@ -523,7 +523,7 @@ namespace PixelGame
 
                 Orientation = "Bottom Left",
                 X = 25,
-                Y = -170,
+                Y = -150,
                 Width = 450,
                 Height = 45,
 
