@@ -648,6 +648,7 @@ namespace PixelGame
                 }
             }
         }
+
         private void UI_ItemToggleHighlight(UIItem item, bool toHighlight)
         {
             if (toHighlight)
@@ -672,6 +673,22 @@ namespace PixelGame
                     {
                         UIPage_Current = page;
                     }
+                }
+            }
+        }
+
+
+        private void UI_UpdatePage(UIPage page)
+        {
+            foreach (UIItem Item in page.UIItems)
+            {
+                if (Item.Data.Contains("Health"))
+                {
+                    Item.Value = Player.Health;
+                }
+                else if (Item.Data.Contains("Breath"))
+                {
+                    Item.Value = Player.Breath;
                 }
             }
         }
@@ -1343,6 +1360,7 @@ namespace PixelGame
 
             if (GameState == "Play")
             {
+                UI_UpdatePage(UIPage_Current);
                 Player.RegainHandler(gameTick);
                 PlayerMovementHandler();
                 Execute_BlockLoadBoundary();
