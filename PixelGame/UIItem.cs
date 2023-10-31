@@ -27,6 +27,7 @@ namespace PixelGame
 
         public Color BaseColor { get; set; }
         public Color BorderColor { get; set; }
+        public Color SubBorderColor { get; set; }
         public Color HighlightedColor { get; set; }
 
         public float BorderTransparency { get; set; }
@@ -61,6 +62,7 @@ namespace PixelGame
 
             BaseColor = Color.Purple;
             BorderColor = Color.Black;
+            SubBorderColor = Color.Purple;
             HighlightedColor = Color.Gold;
 
             BorderTransparency = 1F;
