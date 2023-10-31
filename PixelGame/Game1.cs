@@ -1339,6 +1339,7 @@ namespace PixelGame
 
             if (GameState == "Play")
             {
+                Player.RegainHandler(gameTick);
                 PlayerMovementHandler();
                 Execute_BlockLoadBoundary();
 

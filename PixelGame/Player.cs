@@ -55,5 +55,27 @@ namespace PixelGame
 
             IsFlying = false;
         }
+
+        public void RegainHandler(uint Tick)
+        {
+            //Health
+            if (Tick % HealthRegainInterval == 0)
+            {
+                Health += HealthRedgainAmount;
+                if (Health > Health_Max)
+                {
+                    Health = Health_Max;
+                }
+            }
+            //Breath
+            if (Tick % BreathRegainInterval == 0)
+            {
+                Breath += BreathRegainAmount;
+                if (Breath > Breath_Max)
+                {
+                    Breath = Breath_Max;
+                }
+            }
+        }
     }
 }
