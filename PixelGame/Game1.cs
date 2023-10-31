@@ -501,11 +501,11 @@ namespace PixelGame
                 X = 25,
                 Y = -100,
 
-                Width = 250,
+                Width = 450,
                 Height = 75,
 
                 BorderWidth = 5,
-                BorderColor = Color.Gray,
+                BorderColor = Color.White,
                 BaseColor = Color.Red,
 
                 MinValue = 0,
