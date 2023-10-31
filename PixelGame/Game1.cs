@@ -511,7 +511,9 @@ namespace PixelGame
 
                 MinValue = 0,
                 MaxValue = Player.Health_Max,
-                Value = Player.Health
+                Value = Player.Health,
+
+                Data = new List<string>() { "Health" }
             };
             //Breath Bar
             UIItem BreathBar = new UIItem()
