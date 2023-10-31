@@ -1163,12 +1163,7 @@ namespace PixelGame
             // BEGIN Draw ----
             _spriteBatch.Begin();
 
-
-            if (GameState == "Start")
-            {
-                UI_RenderElements(UIPages[0].UIItems);
-            }
-            else if (GameState == "Play")
+            if (GameState == "Play")
             {
                 //Tiles
                 for (int y = CameraLoadBound_Y_Left; y < CameraLoadBound_Y_Right; y++)
@@ -1185,7 +1180,22 @@ namespace PixelGame
                 //Player
                 _spriteBatch.Draw(Texture_White, new Rectangle(Player.x - CameraOffset_X, Player.y - CameraOffset_Y, Player.Width, Player.Height), Color.Red);
             }
-            
+            else
+            {
+                foreach (UIPage page in UIPages)
+                {
+                    if (page.Type == "Start")
+                    {
+                        UI_RenderElements(page.UIItems);
+                    }
+                    else if (page.Type == "Pause")
+                    {
+                        UI_RenderElements(page.UIItems);
+                    }
+                }
+                
+            }
+
 
             _spriteBatch.End();
             // END Draw ------
