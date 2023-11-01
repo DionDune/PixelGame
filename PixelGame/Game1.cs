@@ -689,6 +689,57 @@ namespace PixelGame
                     _spriteBatch.Draw(Texture_White, new Rectangle(X + Item.BorderWidth, Y + Item.BorderWidth,
                                                                    Item.Width - Item.BorderWidth * 2, Item.Height - Item.BorderWidth * 2),
                                                                    Item.SubBorderColor * Item.SubBorderTransparency);
+                    if (Item.uIItems.Count > 0)
+                    {
+                        foreach (UIItem InnerItem in Item.uIItems)
+                        {
+                            switch (InnerItem.Orientation)
+                            {
+                                case "Bottom Left":
+                                    OrientatePosX = 0;
+                                    OrientatePosY = _graphics.PreferredBackBufferHeight;
+                                    break;
+                                case "Left":
+                                    OrientatePosX = 0;
+                                    break;
+                                case "Top Left":
+                                    OrientatePosX = 0;
+                                    OrientatePosY = 0;
+                                    break;
+                                case "Top":
+                                    OrientatePosY = 0;
+                                    break;
+                                case "Top Right":
+                                    OrientatePosX = _graphics.PreferredBackBufferWidth;
+                                    OrientatePosY = 0;
+                                    break;
+                                case "Right":
+                                    OrientatePosX = _graphics.PreferredBackBufferWidth;
+                                    break;
+                                case "Bottom Right":
+                                    OrientatePosX = _graphics.PreferredBackBufferWidth;
+                                    OrientatePosY = _graphics.PreferredBackBufferHeight;
+                                    break;
+                                case "Bottom":
+                                    OrientatePosY = _graphics.PreferredBackBufferHeight;
+                                    break;
+                            }
+                            X = OrientatePosX + InnerItem.X;
+                            Y = OrientatePosY + InnerItem.Y;
+                            CentreX = OrientatePosX + InnerItem.CentreX;
+                            CentreY = OrientatePosY + InnerItem.CentreY;
+
+                            if (InnerItem.Type == "Container Slot")
+                            {
+                                //Border
+                                UI_RenderOutline(Item.BorderColor, X, Y, InnerItem.Width, InnerItem.Height, InnerItem.BorderWidth, InnerItem.BorderTransparency);
+                                //Inner
+                                _spriteBatch.Draw(Texture_White, new Rectangle(X + InnerItem.BorderWidth, Y + InnerItem.BorderWidth,
+                                                                               InnerItem.Width - InnerItem.BorderWidth * 2, InnerItem.Height - InnerItem.BorderWidth * 2),
+                                                                               InnerItem.SubBorderColor * InnerItem.SubBorderTransparency);
+                            }
+                        }
+                    }
                 }
             }
         }
