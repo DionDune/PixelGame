@@ -563,16 +563,15 @@ namespace PixelGame
                 BorderWidth = 3,
                 BorderColor = new Color(45, 179, 0),
                 SubBorderColor = new Color(32, 128, 0),
-                BaseColor = new Color(32, 128, 0),
 
-                SubBorderTransparency = 0.5F,
+                SubBorderTransparency = 0F,
                 BorderTransparency = 0.75F,
-                BaseTransparency = 0.5F,
 
                 Data = new List<string>() { "Horbar" },
 
                 uIItems = new List<UIItem>() { }
             };
+            //Hotbar Slots
             int SlotsNum = 10;
             for (int i = 0; i < SlotsNum; i++)
             {
@@ -581,10 +580,10 @@ namespace PixelGame
                     Type = "Container Slot",
 
                     Orientation = "Top Left",
-                    X = 30 + (i * (HotBar.Width / SlotsNum)),
-                    Y = 30,
-                    Width = (HotBar.Width / SlotsNum),
-                    Height = HotBar.Height - 10,
+                    X = HotBar.X + HotBar.BorderWidth + (i * ((HotBar.Width - HotBar.BorderWidth * 2) / SlotsNum)),
+                    Y = HotBar.Y + HotBar.BorderWidth,
+                    Width = ((HotBar.Width - HotBar.BorderWidth * 2) / SlotsNum) - 2,
+                    Height = (HotBar.Height - HotBar.BorderWidth * 2),
 
                     BorderWidth = 2,
                     BorderColor = Color.White,
