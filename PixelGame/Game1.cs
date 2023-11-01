@@ -577,7 +577,7 @@ namespace PixelGame
             {
                 Type = "Play",
 
-                UIItems = new List<UIItem>() { HealthBar, BreathBar }
+                UIItems = new List<UIItem>() { HealthBar, BreathBar, HotBar }
             });
         }
 
