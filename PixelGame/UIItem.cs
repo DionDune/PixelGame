@@ -43,6 +43,9 @@ namespace PixelGame
 
         public TextElement Text { get; set; }
 
+        public List<UIItem> uIItems { get; set; }
+        public bool Visible { get; set; }
+
         public UIItem()
         {
             Type = "Button";
@@ -78,6 +81,9 @@ namespace PixelGame
 
 
             Text = null;
+
+            uIItems = new List<UIItem>();
+            Visible = true;
         }
     }
 }
