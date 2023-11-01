@@ -165,15 +165,15 @@ namespace PixelGame
         /* Block Type Ids | Variable Types
          * 
          *  BLOCK IDs
-         * null == air
-         * 0 == Barrier
-         * 1 == Default
-         * 2 == Dirt
-         * 3 == Grass
-         * 4 == Stone
-         * 5 == Sand
-         * 6 == Water
-         * 7 == BedRock
+         * null, 0 == air
+         * 1 == Barrier
+         * 2 == Default
+         * 3 == Dirt
+         * 4 == Grass
+         * 5 == Stone
+         * 6 == Sand
+         * 7 == Water
+         * 8 == BedRock
          * 
          *  INTEGRAL VERIABLE TYPES
          * sbyte: -128 to 127
@@ -321,7 +321,7 @@ namespace PixelGame
             // Gens surface terrain
             for (int x_pos = BorderWidth; x_pos < GroundHeights.Count(); x_pos++)
             {
-                byte Block_Type = 3; // Grass
+                byte Block_Type = 4; // Grass
                 World[GroundHeights[x_pos]][x_pos] = new Tile() { Type = Block_Type };
             }
 
@@ -332,17 +332,17 @@ namespace PixelGame
                 {
                     if (y_pos > GroundHeights[x_pos])
                     {
-                        byte type = 4; // Rock
+                        byte type = 5; // Rock
 
                         if (y_pos < GroundHeights[x_pos] + 15 + random.Next(-5, 5))
                         {
-                            type = 2; // Dirt
+                            type = 3; // Dirt
                         }
                         if (y_pos > World.Count() - BedrockStartDepth)
                         {
                             if (random.Next(y_pos, World.Count() - (World.Count() - y_pos) / 2) == y_pos)
                             {
-                                type = 7; // Bedrock
+                                type = 8; // Bedrock
                             }
                         }
                         World[y_pos][x_pos] = new Tile() { Type = type };
@@ -1347,21 +1347,21 @@ namespace PixelGame
         {
             switch (BlockId)
             {
-                case 0:
-                    return Color_Barrier;
                 case 1:
-                    return Color_Default;
+                    return Color_Barrier;
                 case 2:
-                    return Color_Dirt;
+                    return Color_Default;
                 case 3:
-                    return Color_Grass;
+                    return Color_Dirt;
                 case 4:
-                    return Color_Stone;
+                    return Color_Grass;
                 case 5:
-                    return Color_Sand;
+                    return Color_Stone;
                 case 6:
-                    return Color_Water;
+                    return Color_Sand;
                 case 7:
+                    return Color_Water;
+                case 8:
                     return Color_Bedrock;
             }
 
@@ -1422,7 +1422,7 @@ namespace PixelGame
                 {
                     for (int x = CameraLoadBound_X_Left; x < CameraLoadBound_X_Right; x++)
                     {
-                        if (World[y][x] != null)
+                        if (World[y][x] != null && World[y][x].Type != 0)
                         {
                             _spriteBatch.Draw(Texture_White, getRect(x, y), Texture_GetTileColor(World[y][x].Type));
                         }
