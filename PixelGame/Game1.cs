@@ -569,8 +569,33 @@ namespace PixelGame
                 BorderTransparency = 0.75F,
                 BaseTransparency = 0.5F,
 
-                Data = new List<string>() { "Horbar" }
+                Data = new List<string>() { "Horbar" },
+
+                uIItems = new List<UIItem>() { }
             };
+            int SlotsNum = 10;
+            for (int i = 0; i < SlotsNum; i++)
+            {
+                HotBar.uIItems.Add(new UIItem()
+                {
+                    Type = "Container Slot",
+
+                    Orientation = "Top Left",
+                    X = 30 + (i * (HotBar.Width / SlotsNum)),
+                    Y = 30,
+                    Width = (HotBar.Width / SlotsNum),
+                    Height = HotBar.Height - 10,
+
+                    BorderWidth = 2,
+                    BorderColor = Color.White,
+                    SubBorderColor = Color.White,
+
+                    SubBorderTransparency = 0.2F,
+                    BorderTransparency = 0.4F,
+
+                    Data = new List<string>() { }
+                });
+            }
 
             //In Game Page
             UIPages.Add(new UIPage()
