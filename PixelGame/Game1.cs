@@ -232,7 +232,7 @@ namespace PixelGame
             }
         }
 
-        private List<int> GenerateMap_GenSurfaceHeights()
+        private List<int> GenerateMap_GenSurfaceHeights(int BorderWidth)
         {
             int Height_ChangeAmount = 1;
 
@@ -240,7 +240,7 @@ namespace PixelGame
 
             GroundHeights.Add(WorldHeight / 3);
 
-            for (int x_pos = 1; x_pos < WorldWidth - 9; x_pos++)
+            for (int x_pos = 1; x_pos < WorldWidth - BorderWidth * 1; x_pos++)
             {
                 int heightChangeDirection = random.Next(0, 5);
 
@@ -316,7 +316,7 @@ namespace PixelGame
 
         private void GenerateMap_GenerateTerrain(int BorderWidth, int BedrockStartDepth)
         {
-            List<int> GroundHeights = GenerateMap_GenSurfaceHeights();
+            List<int> GroundHeights = GenerateMap_GenSurfaceHeights(BorderWidth);
 
             // Gens surface terrain
             for (int x_pos = BorderWidth; x_pos < GroundHeights.Count(); x_pos++)
