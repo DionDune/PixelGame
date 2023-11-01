@@ -549,6 +549,28 @@ namespace PixelGame
 
                 Data = new List<string>() { "Breath" }
             };
+            //HotBar
+            UIItem HotBar = new UIItem()
+            {
+                Type = "Container",
+
+                Orientation = "Top Left",
+                X = 25,
+                Y = 25,
+                Width = 900,
+                Height = 90,
+
+                BorderWidth = 3,
+                BorderColor = new Color(45, 179, 0),
+                SubBorderColor = new Color(32, 128, 0),
+                BaseColor = new Color(32, 128, 0),
+
+                SubBorderTransparency = 0.5F,
+                BorderTransparency = 0.75F,
+                BaseTransparency = 0.5F,
+
+                Data = new List<string>() { "Horbar" }
+            };
 
             //In Game Page
             UIPages.Add(new UIPage()
