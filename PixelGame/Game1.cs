@@ -129,7 +129,7 @@ namespace PixelGame
             Player.x = (_graphics.PreferredBackBufferWidth / 2) - (Player.Width / 2);
             Player.y = (_graphics.PreferredBackBufferHeight / 2) - (Player.Height / 2);
 
-            HotbarSelectedInfo = ("", 0, -1);
+            HotbarSelectedInfo = (-1, 0, -1);
 
 
             Camera_SetOffset();
@@ -603,6 +603,16 @@ namespace PixelGame
 
                     NumericalData = new List<int>() { -1, -1 }
                 });
+            }
+            //Add Default Hotbar Items
+            if (true)
+            {
+                HotBar.uIItems[0].NumericalData = new List<int>() { 2, 1 };
+                HotBar.uIItems[1].NumericalData = new List<int>() { 3, 1 };
+                HotBar.uIItems[2].NumericalData = new List<int>() { 4, 1 };
+                HotBar.uIItems[3].NumericalData = new List<int>() { 5, 1 };
+                HotBar.uIItems[4].NumericalData = new List<int>() { 6, 1 };
+                HotBar.uIItems[5].NumericalData = new List<int>() { 7, 1 };
             }
 
 
