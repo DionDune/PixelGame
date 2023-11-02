@@ -557,15 +557,15 @@ namespace PixelGame
                 Orientation = "Top Left",
                 X = 25,
                 Y = 25,
-                Width = 900,
-                Height = 90,
+                Width = 750,
+                Height = 75,
 
                 BorderWidth = 3,
                 BorderColor = new Color(45, 179, 0),
                 SubBorderColor = new Color(32, 128, 0),
 
                 SubBorderTransparency = 0F,
-                BorderTransparency = 0.75F,
+                BorderTransparency = 0F,
 
                 Data = new List<string>() { "Horbar" },
 
@@ -585,12 +585,12 @@ namespace PixelGame
                     Width = ((HotBar.Width - HotBar.BorderWidth * 2) / SlotsNum) - 2,
                     Height = (HotBar.Height - HotBar.BorderWidth * 2),
 
-                    BorderWidth = 2,
+                    BorderWidth = 3,
                     BorderColor = Color.White,
                     SubBorderColor = Color.White,
 
-                    SubBorderTransparency = 0.2F,
-                    BorderTransparency = 0.4F,
+                    SubBorderTransparency = 0.3F,
+                    BorderTransparency = 0.5F,
 
                     Data = new List<string>() { }
                 });
