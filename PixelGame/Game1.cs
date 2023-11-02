@@ -1241,6 +1241,7 @@ namespace PixelGame
             UserControl_PlayerMovement(Keys_NewlyPressed);
             UserControl_PlayerMovement_Flight(Keys_NewlyPressed);
             UserControl_PlayerShiftCrouch(Keys_NewlyPressed);
+            UserControl_ChangeHotbarSlot(Keys_NewlyPressed);
 
 
 
@@ -1384,7 +1385,26 @@ namespace PixelGame
                 UI_ChangePage("Play");
             }
         }
-        
+
+        private void UserControl_ChangeHotbarSlot(Keys[] NewKeys)
+        {
+            foreach (Keys Key in NewKeys)
+            {
+                if (!Keys_BeingPressed.Contains(Key))
+                {
+                    int KeyValue = (int)Key;
+                    if (KeyValue >= 0x30 && KeyValue <= 0x39) // Numbers
+                    {
+                        int Value = -1;
+                        if (KeyValue >= ((int)Keys.D0) && KeyValue <= ((int)Keys.D9)) //Excluded Numpad
+                        {
+                            Value = KeyValue - (int)Keys.D0;
+                            Hotbar_ChangeSlot(Value);
+                        }
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Mouse
