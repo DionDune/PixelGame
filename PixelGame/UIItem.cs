@@ -33,6 +33,8 @@ namespace PixelGame
         public float BorderTransparency { get; set; }
         public float SubBorderTransparency { get; set; }
         public float BaseTransparency { get; set; }
+        public float BorderHighlightedTransparency { get; set; }
+        public float SubBorderHighlightedTransparency { get; set; }
 
         public int MinValue { get; set; }
         public int MaxValue { get; set; }
@@ -71,6 +73,8 @@ namespace PixelGame
 
             BorderTransparency = 1F;
             BaseTransparency = 1F;
+            BorderHighlightedTransparency = 1F;
+            SubBorderHighlightedTransparency = 1F;
 
             MinValue = 0;
             MaxValue = 1;
