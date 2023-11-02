@@ -773,9 +773,12 @@ namespace PixelGame
                                 //Hotbar Item
                                 if (Item.Data.Contains("Hotbar"))
                                 {
-                                    _spriteBatch.Draw(Texture_White, new Rectangle(X + InnerItem.BorderWidth * 2, Y + InnerItem.BorderWidth * 2,
+                                    if (InnerItem.NumericalData[0] > 0)
+                                    {
+                                        _spriteBatch.Draw(Texture_White, new Rectangle(X + InnerItem.BorderWidth * 2, Y + InnerItem.BorderWidth * 2,
                                                                                InnerItem.Width - InnerItem.BorderWidth * 4, InnerItem.Height - InnerItem.BorderWidth * 4),
                                                                                Texture_GetTileColor((byte)InnerItem.NumericalData[0]));
+                                    }
                                 }
                             }
                         }
