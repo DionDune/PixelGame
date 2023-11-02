@@ -839,6 +839,15 @@ namespace PixelGame
 
         private void Hotbar_ChangeSlot(int index)
         {
+            if (index == 0)
+            {
+                index = 9;
+            }
+            else
+            {
+                index--;
+            }
+
             foreach (UIItem Item in UIPage_Current.UIItems)
             {
                 if (Item.Data.Contains("Hotbar"))
