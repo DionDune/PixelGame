@@ -62,6 +62,7 @@ namespace PixelGame
         //Keys/Mouse
         List<Keys> Keys_BeingPressed = new List<Keys>();
         bool MouseClicking_Left;
+        (string, int, int) HotbarSelectedInfo;
 
         #endregion
 
@@ -127,6 +128,8 @@ namespace PixelGame
             };
             Player.x = (_graphics.PreferredBackBufferWidth / 2) - (Player.Width / 2);
             Player.y = (_graphics.PreferredBackBufferHeight / 2) - (Player.Height / 2);
+
+            HotbarSelectedInfo = ("", 0, -1);
 
 
             Camera_SetOffset();
@@ -549,6 +552,9 @@ namespace PixelGame
 
                 Data = new List<string>() { "Breath" }
             };
+
+
+
             //HotBar
             UIItem HotBar = new UIItem()
             {
@@ -595,6 +601,7 @@ namespace PixelGame
                     Data = new List<string>() { }
                 });
             }
+
 
             //In Game Page
             UIPages.Add(new UIPage()
@@ -806,6 +813,25 @@ namespace PixelGame
                 else if (Item.Data.Contains("Breath"))
                 {
                     Item.Value = Player.Breath;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Hotbar
+
+        private void Hotbar_ChangeSlot(int index)
+        {
+            foreach (UIItem Item in UIPage_Current.UIItems)
+            {
+                if (Item.Data.Contains("Hotbar"))
+                {
+                    if (Item.uIItems[index].Data.Count >= 2)
+                    {
+                        HotbarSelectedInfo.Item1 = Item.uIItems[index].Data[0];
+                        Item.uIItems[index].Highlighted = true;
+                    }
                 }
             }
         }
@@ -1358,7 +1384,7 @@ namespace PixelGame
                 UI_ChangePage("Play");
             }
         }
-
+        
         #endregion
 
         #region Mouse
