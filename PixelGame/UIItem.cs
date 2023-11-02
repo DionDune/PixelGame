@@ -42,6 +42,9 @@ namespace PixelGame
         public int Value { get; set; }
         
         public List<string> Data { get; set; }
+        public List<int> NumericalData { get; set; }
+
+
         public int FillDirection { get; set; }
 
         public TextElement Text { get; set; }
@@ -84,6 +87,7 @@ namespace PixelGame
             FillDirection = 0;
 
             Data = null;
+            NumericalData = null;
 
 
             Text = null;
