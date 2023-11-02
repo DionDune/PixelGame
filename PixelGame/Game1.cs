@@ -737,12 +737,25 @@ namespace PixelGame
 
                             if (InnerItem.Type == "Container Slot")
                             {
+                                float BorderTransparency = InnerItem.BorderTransparency;
+                                float SubBorderTransparency = InnerItem.SubBorderTransparency;
+                                Color BorderColor = InnerItem.BorderColor;
+                                Color SubBorderColor = InnerItem.SubBorderColor;
+                                if (InnerItem.Highlighted)
+                                {
+                                    BorderTransparency = InnerItem.BorderHighlightedTransparency;
+                                    SubBorderTransparency = InnerItem.SubBorderHighlightedTransparency;
+                                    BorderColor = InnerItem.HighlightedBorderColor;
+                                    SubBorderColor = InnerItem.HighlightedColor;
+                                }
+
+
                                 //Border
-                                UI_RenderOutline(Item.BorderColor, X, Y, InnerItem.Width, InnerItem.Height, InnerItem.BorderWidth, InnerItem.BorderTransparency);
+                                UI_RenderOutline(BorderColor, X, Y, InnerItem.Width, InnerItem.Height, InnerItem.BorderWidth, BorderTransparency);
                                 //Inner
                                 _spriteBatch.Draw(Texture_White, new Rectangle(X + InnerItem.BorderWidth, Y + InnerItem.BorderWidth,
                                                                                InnerItem.Width - InnerItem.BorderWidth * 2, InnerItem.Height - InnerItem.BorderWidth * 2),
-                                                                               InnerItem.SubBorderColor * InnerItem.SubBorderTransparency);
+                                                                               SubBorderColor * SubBorderTransparency);
                             }
                         }
                     }
