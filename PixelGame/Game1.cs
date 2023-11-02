@@ -1591,10 +1591,13 @@ namespace PixelGame
                 {
                     if (Mouse.GetState().RightButton == ButtonState.Pressed)
                     {
-                        World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = new Tile()
+                        if (HotbarSelectedInfo.Item1 > -1)
                         {
-                            Type = 1
-                        };
+                            World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = new Tile()
+                            {
+                                Type = (byte)HotbarSelectedInfo.Item1
+                            };
+                        }
                     }
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
