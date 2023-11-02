@@ -848,6 +848,13 @@ namespace PixelGame
                         HotbarSelectedInfo.Item1 = Item.uIItems[index].Data[0];
                         Item.uIItems[index].Highlighted = true;
                     }
+                    for (int i = 0; i < Item.uIItems.Count; i++)
+                    {
+                        if (i != index)
+                        {
+                            Item.uIItems[i].Highlighted = false;
+                        }
+                    }
                 }
             }
         }
