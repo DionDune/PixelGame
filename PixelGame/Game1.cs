@@ -62,7 +62,7 @@ namespace PixelGame
         //Keys/Mouse
         List<Keys> Keys_BeingPressed = new List<Keys>();
         bool MouseClicking_Left;
-        (string, int, int) HotbarSelectedInfo;
+        (int, int, int) HotbarSelectedInfo;
 
         #endregion
 
@@ -601,7 +601,7 @@ namespace PixelGame
                     SubBorderHighlightedTransparency = 0.5F,
                     BorderHighlightedTransparency = 0.7F,
 
-                    Data = new List<string>() { "", "0"}
+                    NumericalData = new List<int>() { -1, -1 }
                 });
             }
 
@@ -852,9 +852,9 @@ namespace PixelGame
             {
                 if (Item.Data.Contains("Hotbar"))
                 {
-                    if (Item.uIItems[index].Data.Count >= 2)
+                    if (Item.uIItems[index].NumericalData.Count >= 2)
                     {
-                        HotbarSelectedInfo.Item1 = Item.uIItems[index].Data[0];
+                        HotbarSelectedInfo.Item1 = Item.uIItems[index].NumericalData[0];
                         Item.uIItems[index].Highlighted = true;
                     }
                     for (int i = 0; i < Item.uIItems.Count; i++)
