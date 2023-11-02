@@ -601,7 +601,7 @@ namespace PixelGame
                     SubBorderHighlightedTransparency = 0.5F,
                     BorderHighlightedTransparency = 0.7F,
 
-                    Data = new List<string>() { }
+                    Data = new List<string>() { "", "0"}
                 });
             }
 
