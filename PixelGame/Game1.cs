@@ -594,9 +594,12 @@ namespace PixelGame
                     BorderWidth = 3,
                     BorderColor = Color.White,
                     SubBorderColor = Color.White,
+                    HighlightedBorderColor = Color.Gold,
 
                     SubBorderTransparency = 0.3F,
                     BorderTransparency = 0.5F,
+                    SubBorderHighlightedTransparency = 0.5F,
+                    BorderHighlightedTransparency = 0.7F,
 
                     Data = new List<string>() { }
                 });
