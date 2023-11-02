@@ -573,7 +573,7 @@ namespace PixelGame
                 SubBorderTransparency = 0F,
                 BorderTransparency = 0F,
 
-                Data = new List<string>() { "Horbar" },
+                Data = new List<string>() { "Hotbar" },
 
                 uIItems = new List<UIItem>() { }
             };
