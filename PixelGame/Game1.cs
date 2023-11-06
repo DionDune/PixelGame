@@ -1552,6 +1552,8 @@ namespace PixelGame
 
         /////////////////////////////////////////
 
+        #region Tile Physics
+
         private void Execute_Physics_Fluid()
         {
             PhysicsMaterial_Water_Iterate.Clear();
@@ -1656,6 +1658,9 @@ namespace PixelGame
             }
         }
 
+        #endregion
+
+        /////////////////////////////////////////
         #region Fundamentals
 
         private Rectangle getRect(int x, int y)
