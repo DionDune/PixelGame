@@ -1606,6 +1606,55 @@ namespace PixelGame
                 }
             }
         }
+        private void Execute_Physics_Sand()
+        {
+            PhysicsMaterial_Sand_Iterate.Clear();
+            PhysicsMaterial_Sand_Iterate.UnionWith(PhysicsMaterial_Sand);
+            foreach (Tile particle in PhysicsMaterial_Sand_Iterate)
+            {
+                try
+                {
+                    if (particle.X >= CameraLoadBound_X_Left / 2 && particle.X <= CameraLoadBound_X_Right * 2 &&
+                        particle.Y >= CameraLoadBound_Y_Left / 2 && particle.Y <= CameraLoadBound_Y_Right * 2)
+                    {
+                        //Vertical Gravity
+                        if (World[particle.Y + 1][particle.X] == null)
+                        {
+                            World[particle.Y][particle.X] = null;
+                            World[particle.Y + 1][particle.X] = particle;
+                            particle.Y += 1;
+                        }
+
+                        //Diagonal Gravity
+                        int Direction = random.Next(0, 1);
+                        if (Direction == 0)
+                        {
+                            Direction = -1;
+                        }
+                        for (int j = 0; j < 2; j++)
+                        {
+                            if (World[particle.Y + 1][particle.X + Direction] == null && World[particle.Y][particle.X + Direction] == null && World[particle.Y + 1][particle.X] != null)
+                            {
+                                if (random.Next(0, 6) != 3) // slight randomnes to movement, breaks up moving pillars
+                                {
+                                    World[particle.Y][particle.X] = null;
+                                    World[particle.Y + 1][particle.X + Direction] = particle;
+                                    particle.Y += 1;
+                                    particle.X += Direction;
+                                }
+                                break;
+                            }
+                            Direction *= -1;
+                        }
+                    }
+                }
+                catch
+                {
+                    World[particle.Y][particle.X] = null;
+                    PhysicsMaterial_Sand.Remove(particle);
+                }
+            }
+        }
 
         #region Fundamentals
 
@@ -1690,6 +1739,7 @@ namespace PixelGame
 
 
             Execute_Physics_Fluid();
+            Execute_Physics_Sand();
 
             gameTick++;
 
