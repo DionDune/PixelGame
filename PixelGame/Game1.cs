@@ -1786,7 +1786,6 @@ namespace PixelGame
                 {
                     UI_RenderElements(page.UIItems);
                 }
-                
             }
 
 
