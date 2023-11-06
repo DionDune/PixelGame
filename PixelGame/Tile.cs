@@ -8,6 +8,10 @@ namespace PixelGame
 {
     internal class Tile
     {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Tag { get; set; }
+
         public byte Type { get; set; }
         public byte TextureTag { get; set; }
 

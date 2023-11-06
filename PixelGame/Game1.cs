@@ -64,6 +64,10 @@ namespace PixelGame
         bool MouseClicking_Left;
         (int, int, int) HotbarSelectedInfo;
 
+        // Physics Hashsets
+        private HashSet<Tile> PhysicsMaterial_Water = new HashSet<Tile>();
+        private HashSet<Tile> PhysicsMaterial_Water_Iterate = new HashSet<Tile>();
+
         #endregion
 
         #region Initialize
@@ -139,6 +143,11 @@ namespace PixelGame
 
             UI_GenPages();
             UIPage_Current = UIPages[0];
+
+
+            //Physics Hashsets
+            PhysicsMaterial_Water = new HashSet<Tile>();
+            PhysicsMaterial_Water_Iterate = new HashSet<Tile>();
 
             base.Initialize();
         }
@@ -325,7 +334,7 @@ namespace PixelGame
             for (int x_pos = BorderWidth; x_pos < GroundHeights.Count(); x_pos++)
             {
                 byte Block_Type = 4; // Grass
-                World[GroundHeights[x_pos]][x_pos] = new Tile() { Type = Block_Type };
+                World[GroundHeights[x_pos]][x_pos] = new Tile() { Type = Block_Type, X = x_pos, Y = GroundHeights[x_pos] };
             }
 
             // Gens sub terrain
@@ -348,7 +357,7 @@ namespace PixelGame
                                 type = 8; // Bedrock
                             }
                         }
-                        World[y_pos][x_pos] = new Tile() { Type = type };
+                        World[y_pos][x_pos] = new Tile() { Type = type, X = x_pos, Y = GroundHeights[x_pos] };
                     }
                 }
             }
@@ -1539,6 +1548,61 @@ namespace PixelGame
 
         /////////////////////////////////////////
 
+        private void Execute_Physics_Fluid()
+        {
+            PhysicsMaterial_Water_Iterate.Clear();
+            PhysicsMaterial_Water_Iterate.UnionWith(PhysicsMaterial_Water);
+            foreach (Tile particle in PhysicsMaterial_Water_Iterate)
+            {
+                try
+                {
+                    if (World[particle.Y + 1][particle.X] == null)
+                    {
+                        // Verical Gravity
+                        World[particle.Y + 1][particle.X] = particle;
+                        World[particle.Y][particle.X] = null;
+                        particle.Y += 1;
+
+                        // Sideways Flow
+                        if (random.Next(0, 15) == 1 && World[particle.Y][particle.X + particle.Tag] == null)
+                        {
+                            World[particle.Y][particle.X + particle.Tag] = particle;
+                            World[particle.Y][particle.X] = null;
+                            particle.X += particle.Tag;
+                        }
+                        else if (random.Next(0, 25) == 1 && World[particle.Y][particle.X + (particle.Tag * -1)] == null)
+                        {
+                            World[particle.Y][particle.X + (particle.Tag * -1)] = particle;
+                            World[particle.Y][particle.X] = null;
+                            particle.X += (particle.Tag * -1);
+                        }
+                    }
+                    else
+                    {
+                        // Sideways Flow
+                        if (World[particle.Y][particle.X + particle.Tag] == null)
+                        {
+                            World[particle.Y][particle.X + particle.Tag] = particle;
+                            World[particle.Y][particle.X] = null;
+                            particle.X += particle.Tag;
+                        }
+                        else if (World[particle.Y][particle.X + (particle.Tag * -1)] == null)
+                        {
+                            World[particle.Y][particle.X + (particle.Tag * -1)] = particle;
+                            World[particle.Y][particle.X] = null;
+                            particle.X -= particle.Tag;
+                            particle.Tag *= -1;
+                        }
+                    }
+                }
+                catch
+                {
+                    World[particle.Y][particle.X] = null;
+                    PhysicsMaterial_Water.Remove(particle);
+                }
+            }
+        }
+
         #region Fundamentals
 
         private Rectangle getRect(int x, int y)
@@ -1593,10 +1657,19 @@ namespace PixelGame
                     {
                         if (HotbarSelectedInfo.Item1 > -1)
                         {
-                            World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = new Tile()
+                            int XPos = (CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth);
+                            int YPos = (CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight);
+                            World[YPos][XPos] = new Tile()
                             {
-                                Type = (byte)HotbarSelectedInfo.Item1
+                                Type = (byte)HotbarSelectedInfo.Item1,
+                                X = XPos,
+                                Y = YPos
                             };
+                            if ((byte)HotbarSelectedInfo.Item1 == 7)
+                            {
+                                World[YPos][XPos].Tag = 1;
+                                PhysicsMaterial_Water.Add(World[YPos][XPos]);
+                            }
                         }
                     }
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
@@ -1607,6 +1680,8 @@ namespace PixelGame
                 catch { }
             }
 
+
+            Execute_Physics_Fluid();
 
             gameTick++;
 
