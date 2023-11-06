@@ -67,6 +67,8 @@ namespace PixelGame
         // Physics Hashsets
         private HashSet<Tile> PhysicsMaterial_Water = new HashSet<Tile>();
         private HashSet<Tile> PhysicsMaterial_Water_Iterate = new HashSet<Tile>();
+        private HashSet<Tile> PhysicsMaterial_Sand = new HashSet<Tile>();
+        private HashSet<Tile> PhysicsMaterial_Sand_Iterate = new HashSet<Tile>();
 
         #endregion
 
@@ -148,6 +150,8 @@ namespace PixelGame
             //Physics Hashsets
             PhysicsMaterial_Water = new HashSet<Tile>();
             PhysicsMaterial_Water_Iterate = new HashSet<Tile>();
+            PhysicsMaterial_Sand = new HashSet<Tile>();
+            PhysicsMaterial_Sand_Iterate = new HashSet<Tile>();
 
             base.Initialize();
         }
@@ -1669,6 +1673,10 @@ namespace PixelGame
                             {
                                 World[YPos][XPos].Tag = 1;
                                 PhysicsMaterial_Water.Add(World[YPos][XPos]);
+                            }
+                            if ((byte)HotbarSelectedInfo.Item1 == 6)
+                            {
+                                PhysicsMaterial_Sand.Add(World[YPos][XPos]);
                             }
                         }
                     }
