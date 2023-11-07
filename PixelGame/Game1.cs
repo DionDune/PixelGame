@@ -1680,25 +1680,29 @@ namespace PixelGame
 
         private void Tile_Create(int X, int Y)
         {
-            World[Y][X] = new Tile()
+            if (X >= 0 && X < World[0].Count && Y >= 0 && Y < World.Count)
             {
-                Type = (byte)HotbarSelectedInfo.Item1,
-                X = X,
-                Y = Y
-            };
-            if ((byte)HotbarSelectedInfo.Item1 == 7)
-            {
-                World[Y][X].Tag = 1;
-                PhysicsMaterial_Water.Add(World[Y][X]);
+                World[Y][X] = new Tile()
+                {
+                    Type = (byte)HotbarSelectedInfo.Item1,
+                    X = X,
+                    Y = Y
+                };
+                if ((byte)HotbarSelectedInfo.Item1 == 7)
+                {
+                    World[Y][X].Tag = 1;
+                    PhysicsMaterial_Water.Add(World[Y][X]);
+                }
+                if ((byte)HotbarSelectedInfo.Item1 == 6)
+                {
+                    PhysicsMaterial_Sand.Add(World[Y][X]);
+                }
             }
-            if ((byte)HotbarSelectedInfo.Item1 == 6)
-            {
-                PhysicsMaterial_Sand.Add(World[Y][X]);
-            }
+            
         }
         private void Tile_Erase(int X, int Y)
         {
-            if (World[Y][X] != null)
+            if (World[Y][X] != null && X >= 0 && X < World[0].Count && Y >= 0 && Y < World.Count)
             {
                 if (World[Y][X].Type == 6)
                 {
@@ -1765,26 +1769,24 @@ namespace PixelGame
                 PlayerMovementHandler();
                 Execute_BlockLoadBoundary();
 
-                try
+
+                if (Mouse.GetState().RightButton == ButtonState.Pressed)
                 {
-                    if (Mouse.GetState().RightButton == ButtonState.Pressed)
-                    {
-                        if (HotbarSelectedInfo.Item1 > -1)
-                        {
-                            int XPos = (CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth);
-                            int YPos = (CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight);
-                            Tile_Create(XPos, YPos);
-                        }
-                    }
-                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    if (HotbarSelectedInfo.Item1 > -1)
                     {
                         int XPos = (CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth);
                         int YPos = (CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight);
-
-                        Tile_Erase(XPos, YPos);
+                        Tile_Create(XPos, YPos);
                     }
                 }
-                catch { }
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    int XPos = (CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth);
+                    int YPos = (CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight);
+
+                    Tile_Erase(XPos, YPos);
+                }
+
             }
 
 
