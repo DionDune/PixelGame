@@ -1676,8 +1676,47 @@ namespace PixelGame
 
         #endregion
 
+        #region Tile Creation/Deletion
+
+        private void Tile_Create(int X, int Y)
+        {
+            World[Y][X] = new Tile()
+            {
+                Type = (byte)HotbarSelectedInfo.Item1,
+                X = X,
+                Y = Y
+            };
+            if ((byte)HotbarSelectedInfo.Item1 == 7)
+            {
+                World[Y][X].Tag = 1;
+                PhysicsMaterial_Water.Add(World[Y][X]);
+            }
+            if ((byte)HotbarSelectedInfo.Item1 == 6)
+            {
+                PhysicsMaterial_Sand.Add(World[Y][X]);
+            }
+        }
+        private void Tile_Erase(int X, int Y)
+        {
+            if (World[Y][X] != null)
+            {
+                if (World[Y][X].Type == 6)
+                {
+                    PhysicsMaterial_Sand.Remove(World[Y][X]);
+                }
+                else if (World[Y][X].Type == 7)
+                {
+                    PhysicsMaterial_Water.Remove(World[Y][X]);
+                }
+
+                World[Y][X] = null;
+            }
+        }
+
+        #endregion
+
         /////////////////////////////////////////
-        
+
         #region Fundamentals
 
         private Rectangle getRect(int x, int y)
@@ -1734,26 +1773,15 @@ namespace PixelGame
                         {
                             int XPos = (CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth);
                             int YPos = (CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight);
-                            World[YPos][XPos] = new Tile()
-                            {
-                                Type = (byte)HotbarSelectedInfo.Item1,
-                                X = XPos,
-                                Y = YPos
-                            };
-                            if ((byte)HotbarSelectedInfo.Item1 == 7)
-                            {
-                                World[YPos][XPos].Tag = 1;
-                                PhysicsMaterial_Water.Add(World[YPos][XPos]);
-                            }
-                            if ((byte)HotbarSelectedInfo.Item1 == 6)
-                            {
-                                PhysicsMaterial_Sand.Add(World[YPos][XPos]);
-                            }
+                            Tile_Create(XPos, YPos);
                         }
                     }
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {
-                        World[(CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight)][(CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth)] = null;
+                        int XPos = (CameraOffset_X / TileWidth) + (Mouse.GetState().X / TileWidth);
+                        int YPos = (CameraOffset_Y / TileHeight) + (Mouse.GetState().Y / TileHeight);
+
+                        Tile_Erase(XPos, YPos);
                     }
                 }
                 catch { }
