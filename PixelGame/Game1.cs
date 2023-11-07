@@ -1585,6 +1585,22 @@ namespace PixelGame
                     }
                     else
                     {
+                        // Sand Sink
+                        if (World[particle.Y - 1][particle.X] != null)
+                        {
+                            if (World[particle.Y - 1][particle.X].Type == 6)
+                            {
+                                Tile topBlock = World[particle.Y - 1][particle.X];
+                                Tile bottomBlock = World[particle.Y][particle.X];
+
+                                World[particle.Y - 1][particle.X] = bottomBlock;
+                                World[particle.Y][particle.X] = topBlock;
+
+                                topBlock.Y += 1;
+                                bottomBlock.Y -= 1;
+                            }
+                        }
+
                         // Sideways Flow
                         if (World[particle.Y][particle.X + particle.Tag] == null)
                         {
