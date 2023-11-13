@@ -1800,7 +1800,15 @@ namespace PixelGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.LightSkyBlue);
+            if (GameState == "Play")
+            {
+                GraphicsDevice.Clear(Color.LightSkyBlue);
+            }
+            else
+            {
+                GraphicsDevice.Clear(Color.Black);
+            }
+
 
             // BEGIN Draw ----
             _spriteBatch.Begin();
